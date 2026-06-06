@@ -20,7 +20,9 @@
       mx = e.clientX; my = e.clientY;
       cursor.style.left = mx + 'px';
       cursor.style.top  = my + 'px';
-    });
+      cursor.style.opacity = '1';
+      follower.style.opacity = '1';
+    }, { once: false });
     (function animCursor() {
       fx += (mx - fx) * 0.1;
       fy += (my - fy) * 0.1;
