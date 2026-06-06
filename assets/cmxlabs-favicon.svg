@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <title>CMX Labs — Favicon</title>
+  <!-- left diamond -->
+  <rect x="2" y="2" width="18" height="18" rx="3" fill="none" stroke="#534AB7" stroke-width="2" transform="rotate(45 11 11)"/>
+  <!-- right diamond -->
+  <rect x="12" y="4" width="15" height="15" rx="2.5" fill="#534AB7" fill-opacity="0.1" stroke="#7F77DD" stroke-width="1.5" transform="rotate(45 19.5 11.5)"/>
+  <!-- node -->
+  <circle cx="15" cy="11" r="3.5" fill="#534AB7"/>
+  <circle cx="15" cy="11" r="1.5" fill="#AFA9EC"/>
+</svg>

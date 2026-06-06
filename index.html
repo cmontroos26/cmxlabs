@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CMX Labs — Digital Product Studio</title>
+  <meta name="description" content="CMX Labs is a digital product studio based in Curaçao. We design, build, and launch digital products that perform."/>
+  <meta name="theme-color" content="#111110"/>
+  <link rel="icon" type="image/svg+xml" href="assets/cmxlabs-favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-follower" id="follower" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo" aria-label="CMX Labs — Home">
+        <img src="assets/cmxlabs-logo-nav.svg" alt="CMX Labs" height="52"/>
+      </a>
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#work"     class="nav-link">Work</a></li>
+        <li><a href="#contact"  class="nav-link">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-nav-cta nav-cta">Start a project</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home" aria-label="Hero">
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-noise"    aria-hidden="true"></div>
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-fade" aria-hidden="true"></div>
+
+    <div class="container hero-center">
+
+      <div class="hero-eyebrow" aria-hidden="true">
+        <span class="eyebrow-dot"></span>
+        Digital Product Studio &nbsp;&middot;&nbsp; Cura&ccedil;ao
+      </div>
+
+      <h1 class="hero-h1">
+        <span class="rl"><span>From idea to</span></span>
+        <span class="rl"><span><em class="hero-accent">live product.</em></span></span>
+      </h1>
+
+      <p class="hero-sub">
+        We design, build, and launch digital products.<br>
+        From first wireframe to real users.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary btn-xl btn-magnetic">Start a project &rarr;</a>
+        <a href="#work"    class="btn btn-ghost  btn-xl">See our work</a>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- CMX MEANING -->
+  <section class="cmx-section section-cream" aria-label="What CMX stands for">
+    <div class="container">
+      <div class="fc-header sr">
+        <div class="section-label">What CMX stands for</div>
+      </div>
+
+      <!-- C · M · X — three equal cards -->
+      <div class="fc-row-3">
+
+        <!-- C — Command -->
+        <div class="fc-card sr">
+          <div class="fc-card-head">
+            <span class="fc-card-title">C<span class="fc-title-sep">:</span> Command</span>
+            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="fc-visual fc-c-vis">
+            <div class="fc-terminal">
+              <div class="fc-term-bar">
+                <span class="fc-tdot fc-tdot-r"></span>
+                <span class="fc-tdot fc-tdot-y"></span>
+                <span class="fc-tdot fc-tdot-g"></span>
+              </div>
+              <div class="fc-term-body">
+                <div class="fc-tline"><span class="fc-prompt">$</span> cmx init --project</div>
+                <div class="fc-tline fc-tgray">Initializing workspace...</div>
+                <div class="fc-tline fc-tgreen">&#10003; Project ready.</div>
+                <div class="fc-tline fc-tblue">&#10003; Stack configured.</div>
+                <div class="fc-tline"><span class="fc-prompt">$</span> <span class="fc-cursor"></span></div>
+              </div>
+            </div>
+            <p class="fc-tagline">Lead with authority. Every solution is purposeful, not accidental.</p>
+          </div>
+        </div>
+
+        <!-- M — Modern -->
+        <div class="fc-card sr">
+          <div class="fc-card-head">
+            <span class="fc-card-title">M<span class="fc-title-sep">:</span> Modern</span>
+            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="fc-visual fc-m-vis">
+            <div class="fc-tech-grid">
+              <span class="fc-pill">React</span>
+              <span class="fc-pill">TypeScript</span>
+              <span class="fc-pill">Next.js</span>
+              <span class="fc-pill">Node.js</span>
+              <span class="fc-pill">Tailwind</span>
+              <span class="fc-pill">Postgres</span>
+              <span class="fc-pill">Vercel</span>
+              <span class="fc-pill">Stripe</span>
+            </div>
+            <p class="fc-tagline fc-tagline-dark">Built for today and tomorrow. No legacy thinking, always forward.</p>
+          </div>
+        </div>
+
+        <!-- X — Xecution -->
+        <div class="fc-card sr">
+          <div class="fc-card-head">
+            <span class="fc-card-title">X<span class="fc-title-sep">:</span> Xecution</span>
+            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="fc-visual fc-x-vis">
+            <div class="fc-checklist">
+              <div class="fc-check fc-done">Design</div>
+              <div class="fc-check fc-done">Development</div>
+              <div class="fc-check fc-done">Testing</div>
+              <div class="fc-check fc-ship">Shipped &rarr;</div>
+            </div>
+            <p class="fc-tagline">Ideas are nothing without delivery. CMX ships: fast, clean, smart.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Labs — full width -->
+      <div class="fc-card fc-labs-card sr">
+        <div class="fc-card-head">
+          <span class="fc-card-title">Labs<span class="fc-title-sep">:</span> Where ideas become products</span>
+          <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="fc-visual fc-labs-vis">
+          <p class="fc-labs-eyebrow">Products we built &amp; shipped</p>
+          <div class="fc-lp-grid">
+
+            <!-- CourtRadar -->
+            <div class="fc-lp-card">
+              <div class="fc-lp-icon fc-lp-icon-cr">
+                <svg width="22" height="22" viewBox="0 0 38 38" fill="none" aria-hidden="true">
+                  <path d="M 22 36 A 14 14 0 0 1 36 22" stroke="#f97316" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+                  <path d="M 14 36 A 22 22 0 0 1 36 14" stroke="#f97316" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
+                  <path d="M 5  36 A 31 31 0 0 1 36 5"  stroke="#f97316" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+                  <circle cx="23" cy="22" r="4" fill="#bef264"/>
+                </svg>
+              </div>
+              <div class="fc-lp-info">
+                <p class="fc-lp-name">CourtRadar</p>
+                <p class="fc-lp-desc">Padel court finder · Curaçao</p>
+              </div>
+              <span class="fc-lp-live">● Live</span>
+            </div>
+
+            <!-- Altrex -->
+            <div class="fc-lp-card">
+              <div class="fc-lp-icon fc-lp-icon-al">
+                <svg width="22" height="22" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+                  <line x1="6"  y1="10" x2="6"  y2="14" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                  <rect x="4"  y="14" width="4" height="5" fill="#00CFDF" rx="0.5"/>
+                  <line x1="6"  y1="19" x2="6"  y2="23" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="17" y1="7"  x2="17" y2="11" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                  <rect x="14" y="11" width="6" height="13" fill="#00CFDF" rx="0.5"/>
+                  <line x1="17" y1="24" x2="17" y2="29" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="29" y1="3"  x2="29" y2="7"  stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                  <rect x="26" y="7"  width="7" height="21" fill="#00CFDF" rx="0.5"/>
+                  <line x1="29" y1="28" x2="29" y2="33" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="fc-lp-info">
+                <p class="fc-lp-name">Altrex</p>
+                <p class="fc-lp-desc">Crypto signals · BTC, ETH, SOL</p>
+              </div>
+              <span class="fc-lp-live">● Live</span>
+            </div>
+
+            <!-- SupportElevate -->
+            <div class="fc-lp-card">
+              <div class="fc-lp-icon fc-lp-icon-se">
+                <img src="assets/elevate-logo.webp" alt="Elevate Gymnastics" style="width:100%;height:100%;object-fit:contain;padding:3px"/>
+              </div>
+              <div class="fc-lp-info">
+                <p class="fc-lp-name">SupportElevate</p>
+                <p class="fc-lp-desc">Athlete crowdfunding · Goal in 5 days</p>
+              </div>
+              <span class="fc-lp-live">● Live</span>
+            </div>
+
+          </div>
+          <p class="fc-tagline fc-tagline-dark" style="margin-top:14px">Built from zero to launch. End-to-end, every time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section section-cream" id="services" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-header sr">
+        <div class="section-label">What we do</div>
+        <h2 class="section-title section-title-dark" id="services-title">
+          Built for your<br>specific business.
+        </h2>
+        <p class="section-intro">
+          We use the right tools for each job. From strategy to shipped product.
+        </p>
+      </div>
+
+      <div class="svc-fgrid">
+
+        <!-- Card 1: Product Design (wider) -->
+        <div class="fc-card sr">
+          <div class="fc-card-head">
+            <span class="fc-card-title">Product Design &amp; Development</span>
+            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="fc-visual fc-svc1-vis">
+            <div class="fc-browser">
+              <div class="fc-browser-bar">
+                <div class="fc-browser-dots"><span></span><span></span><span></span></div>
+                <div class="fc-browser-url">app.cmxlabs.io</div>
+              </div>
+              <div class="fc-browser-body">
+                <div class="fc-brow-sidebar"></div>
+                <div class="fc-brow-main">
+                  <div class="fc-brow-h"></div>
+                  <div class="fc-brow-cards">
+                    <div class="fc-brow-card"></div>
+                    <div class="fc-brow-card"></div>
+                    <div class="fc-brow-card"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fc-svc-tags">
+              <span>Web apps</span><span>Mobile</span><span>Platforms</span><span>E-commerce</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Automation (narrower) -->
+        <div class="fc-card sr">
+          <div class="fc-card-head">
+            <span class="fc-card-title">Custom Software &amp; Automation</span>
+            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="fc-visual fc-svc2-vis">
+            <div class="fc-flow">
+              <div class="fc-flow-node fc-fn-trigger">
+                <svg class="fc-fn-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9.5 2L4 9h5l-2.5 5L14 7H9L11.5 2H9.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                New Event
+              </div>
+              <div class="fc-flow-arrow-v"></div>
+              <div class="fc-flow-node fc-fn-action">
+                <svg class="fc-fn-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2a6 6 0 100 12A6 6 0 008 2zM5 8l2 2 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Validate
+              </div>
+              <div class="fc-flow-arrow-v"></div>
+              <div class="fc-flow-node fc-fn-action">
+                <svg class="fc-fn-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M11.5 4.5l-1.4 1.4M4.5 11.5l-1.4 1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                Process
+              </div>
+              <div class="fc-flow-arrow-v"></div>
+              <div class="fc-flow-node fc-fn-output">
+                <svg class="fc-fn-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h10M9 5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Deliver
+              </div>
+            </div>
+            <div class="fc-svc-tags">
+              <span>Dashboards</span><span>APIs</span><span>Integrations</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Strategy (full width) -->
+        <div class="fc-card fc-span-full sr">
+          <div class="fc-card-head">
+            <span class="fc-card-title">Strategy, Analytics &amp; Growth</span>
+            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="fc-visual fc-svc3-vis">
+            <div class="fc-chart-area">
+              <!-- Horizontal grid lines -->
+              <div class="fc-chart-grid">
+                <div class="fc-grid-line"></div>
+                <div class="fc-grid-line"></div>
+                <div class="fc-grid-line"></div>
+              </div>
+              <div class="fc-chart-bars">
+                <div class="fc-bar" style="--h:40%"></div>
+                <div class="fc-bar" style="--h:55%"></div>
+                <div class="fc-bar" style="--h:48%"></div>
+                <div class="fc-bar" style="--h:70%"></div>
+                <div class="fc-bar" style="--h:62%"></div>
+                <div class="fc-bar" style="--h:85%"></div>
+                <div class="fc-bar fc-bar-hi" style="--h:95%"></div>
+              </div>
+              <svg class="fc-chart-line" viewBox="0 0 280 90" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="fc-teal-g" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#2DD4BF" stop-opacity="0.30"/>
+                    <stop offset="100%" stop-color="#2DD4BF" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <polygon points="0,72 40,58 80,65 120,41 160,49 200,23 240,10 280,4 280,90 0,90" fill="url(#fc-teal-g)"/>
+                <polyline points="0,72 40,58 80,65 120,41 160,49 200,23 240,10 280,4" fill="none" stroke="#2DD4BF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Data point circles -->
+                <circle cx="0"   cy="72" r="3"   fill="#2DD4BF" opacity="0.5"/>
+                <circle cx="40"  cy="58" r="3"   fill="#2DD4BF" opacity="0.6"/>
+                <circle cx="80"  cy="65" r="3"   fill="#2DD4BF" opacity="0.6"/>
+                <circle cx="120" cy="41" r="3"   fill="#2DD4BF" opacity="0.7"/>
+                <circle cx="160" cy="49" r="3"   fill="#2DD4BF" opacity="0.7"/>
+                <circle cx="200" cy="23" r="3.5" fill="#2DD4BF" opacity="0.85"/>
+                <circle cx="240" cy="10" r="3.5" fill="#2DD4BF" opacity="0.9"/>
+                <circle cx="280" cy="4"  r="5"   fill="#2DD4BF"/>
+                <circle cx="280" cy="4"  r="9"   fill="none" stroke="#2DD4BF" stroke-width="1.5" opacity="0.35"/>
+              </svg>
+            </div>
+            <div class="fc-chart-kpis">
+              <div class="fc-kpi"><strong>+127%</strong><span>Growth</span></div>
+              <div class="fc-kpi"><strong>4.2&times;</strong><span>ROAS</span></div>
+              <div class="fc-kpi"><strong>Top 3</strong><span>SEO Ranked</span></div>
+            </div>
+            <div class="fc-svc-tags">
+              <span>Analytics</span><span>Strategy</span><span>SEO</span><span>Growth</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR PORTFOLIO (dark intro) -->
+  <section class="ps-section ps-dark work-intro-section" id="work">
+    <div class="container">
+      <div class="work-intro sr">
+        <div class="section-label" style="color:var(--purple-lite)">Our Portfolio</div>
+        <h2 class="work-intro-title">Products we built<br>and launched.</h2>
+        <p class="work-intro-sub">Three live products, built from scratch, shipped to real users.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALTREX (dark) -->
+  <section class="ps-section ps-dark ps-no-top" aria-labelledby="altrex-title">
+    <div class="container">
+      <div class="ps-grid">
+
+        <div class="ps-text sr">
+          <span class="section-label" style="color:var(--purple-lite)">Altrex</span>
+          <h2 class="ps-h2" id="altrex-title">
+            Stop guessing.<br>Start signaling.
+          </h2>
+          <p class="ps-p">
+            AI-powered crypto trading signals for BTC, ETH, SOL and more. Six strategies, Telegram alerts with entry, stop-loss and take-profit, backtest history, and one-tap execution on connected exchanges.
+          </p>
+          <div class="ps-tags">
+            <span>AI signals</span><span>Telegram alerts</span><span>One-tap execution</span>
+          </div>
+          <a href="https://altrex.io" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+            Visit Altrex &rarr;
+          </a>
+        </div>
+
+        <div class="ps-devices sr">
+          <div class="cr-portfolio-phone">
+            <div class="cr-phone-frame">
+              <div class="cr-phone-notch" aria-hidden="true"></div>
+              <div class="cr-phone-screen">
+                <div class="al-app">
+
+                  <!-- Nav -->
+                  <div class="al-nav">
+                    <div class="al-nav-logo">
+                      <svg width="18" height="18" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+                        <line x1="6"  y1="10" x2="6"  y2="14" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                        <rect x="4"   y="14" width="4" height="5"  fill="#00CFDF" rx="0.5"/>
+                        <line x1="6"  y1="19" x2="6"  y2="23" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="17" y1="7"  x2="17" y2="11" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                        <rect x="14"  y="11" width="6" height="13" fill="#00CFDF" rx="0.5"/>
+                        <line x1="17" y1="24" x2="17" y2="29" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="29" y1="3"  x2="29" y2="7"  stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                        <rect x="26"  y="7"  width="7" height="21" fill="#00CFDF" rx="0.5"/>
+                        <line x1="29" y1="28" x2="29" y2="33" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
+                      </svg>
+                      <span>Altrex.io</span>
+                    </div>
+                    <span class="al-nav-btn">Get started</span>
+                  </div>
+
+                  <!-- Body -->
+                  <div class="al-body">
+                    <div class="al-pill">BTC &middot; ETH &middot; SOL &middot; More coming</div>
+                    <h2 class="al-h1">Get crypto trade alerts on Telegram.</h2>
+                    <p class="al-accent">You <span class="al-teal">choose how to act.</span></p>
+                    <p class="al-desc">Our bot scans the market 24/7. When it spots an opportunity you get a Telegram alert with entry price, stop loss, and take profit already calculated.</p>
+                    <div class="al-btn-primary">Start free trial</div>
+                    <div class="al-btn-outline">How it works</div>
+                    <p class="al-fine">7-day free trial &middot; No credit card required &middot; Cancel anytime</p>
+                    <!-- Telegram bot card -->
+                    <div class="al-tg-card">
+                      <div class="al-tg-head">
+                        <div class="al-tg-av"></div>
+                        <div class="al-tg-info">
+                          <span class="al-tg-name">Altrex.io</span>
+                          <span class="al-tg-sub">bot</span>
+                        </div>
+                      </div>
+                      <div class="al-tg-body">
+                        <div class="al-tg-check">&#10003;</div>
+                        <span class="al-tg-label">Order placed!</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPORT ELEVATE (cream) -->
+  <section class="ps-section ps-cream" aria-labelledby="eevate-title">
+    <div class="container">
+      <div class="ps-grid ps-flip">
+
+        <div class="ps-devices sr">
+          <div class="cr-portfolio-phone">
+            <div class="cr-phone-frame">
+              <div class="cr-phone-notch" aria-hidden="true"></div>
+              <div class="cr-phone-screen">
+                <div class="se-app">
+
+                  <!-- Hero zone -->
+                  <div class="se-hero">
+                    <div class="se-pill">&#11044; Copa de Las Am&eacute;ricas, Lima Peru 2026</div>
+                    <h2 class="se-h1">Support Elevate<br><span class="se-teal">Gymnastics<br>Cura&ccedil;ao</span></h2>
+                    <p class="se-desc">Help our 14 athletes compete at the Copa de Las Am&eacute;ricas. Every contribution brings them closer to Lima.</p>
+                    <div class="se-scroll-hint">scroll &#x2193;</div>
+                  </div>
+
+                  <!-- Campaign progress zone -->
+                  <div class="se-progress">
+                    <div class="se-prog-label">CAMPAIGN PROGRESS &nbsp;&middot;&nbsp; 14 athletes</div>
+                    <div class="se-prog-track">
+                      <div class="se-prog-fill" style="width:53%"></div>
+                      <div class="se-prog-fill2" style="width:19%"></div>
+                    </div>
+                    <div class="se-prog-meta">
+                      <span class="se-teal-t">XCG 30,673 raised</span>
+                      <span class="se-grey">XCG 58,408 goal</span>
+                    </div>
+                    <div class="se-targets">
+                      <div class="se-targets-label">FUNDRAISING TARGETS</div>
+                      <div class="se-target">
+                        <div class="se-t-left"><span class="se-t-by">RAISE BY</span><span class="se-t-date">May 31</span></div>
+                        <div class="se-t-bar-wrap"><div class="se-t-bar se-t-full"></div></div>
+                        <span class="se-t-reached">&#10003; reached</span>
+                      </div>
+                      <div class="se-target">
+                        <div class="se-t-left"><span class="se-t-by">RAISE BY</span><span class="se-t-date">Jun 16</span></div>
+                        <div class="se-t-bar-wrap"><div class="se-t-bar" style="width:58%"></div></div>
+                        <span class="se-t-pct">58%</span>
+                      </div>
+                      <div class="se-target">
+                        <div class="se-t-left"><span class="se-t-by">RAISE BY</span><span class="se-t-date">Jun 30</span></div>
+                        <div class="se-t-bar-wrap"><div class="se-t-bar" style="width:3%"></div></div>
+                        <span class="se-t-zero">0%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ps-text sr">
+          <span class="section-label">SupportElevate</span>
+          <h2 class="ps-h2 ps-h2-dark" id="eevate-title">
+            Fund athletes.<br>Change lives.
+          </h2>
+          <p class="ps-p ps-p-dark">
+            A sports crowdfunding platform built for Caribbean athletes. We built it for Xiara, a gymnast from Cura&ccedil;ao competing at Copa de Las Am&eacute;ricas 2026. She hit her full goal in 5 days.
+          </p>
+          <div class="ps-tags ps-tags-dark">
+            <span>Sports crowdfunding</span><span>Goal reached</span><span>Copa de Las Am&eacute;ricas</span>
+          </div>
+          <a href="https://supportelevate.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+            Visit SupportElevate &rarr;
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COURT-RADAR (dark) -->
+  <section class="ps-section ps-dark" aria-labelledby="court-title">
+    <div class="container">
+      <div class="ps-grid">
+
+        <div class="ps-text sr">
+          <span class="section-label" style="color:var(--orange)">Court-Radar</span>
+          <h2 class="ps-h2" id="court-title">
+            Find. Book.<br>Play padel.
+          </h2>
+          <p class="ps-p">
+            Real-time court availability across 6 padel clubs in Cura&ccedil;ao. Players find open slots and book in seconds. No phone calls, no guessing.
+          </p>
+          <div class="ps-tags">
+            <span>Court booking</span><span>Live availability</span><span>6 clubs · 25+ courts</span>
+          </div>
+          <a href="https://court-radar.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+            Visit Court-Radar &rarr;
+          </a>
+        </div>
+
+        <div class="ps-devices sr">
+          <div class="cr-portfolio-phone">
+            <div class="cr-phone-frame">
+              <div class="cr-phone-notch" aria-hidden="true"></div>
+              <div class="cr-phone-screen">
+                <div class="cr-app">
+                  <div class="cr-hero-zone">
+                    <div class="cr-court-bg" aria-hidden="true"></div>
+                    <div class="cr-app-nav" aria-hidden="true">
+                      <div class="cr-brand">
+                        <div class="cr-radar-wrap">
+                          <div class="cr-radar-glow" aria-hidden="true"></div>
+                          <svg class="cr-radar-svg" width="28" height="28" viewBox="0 0 38 38" fill="none" aria-hidden="true">
+                            <path d="M 22 36 A 14 14 0 0 1 36 22" stroke="#f97316" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+                            <path d="M 14 36 A 22 22 0 0 1 36 14" stroke="#f97316" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
+                            <path d="M 5  36 A 31 31 0 0 1 36 5"  stroke="#f97316" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+                            <line x1="36" y1="36" x2="12" y2="12" stroke="#f97316" stroke-width="1.2" opacity="0.4"/>
+                            <circle cx="23" cy="22" r="6.5" fill="#f97316" opacity="0.15"/>
+                            <circle cx="23" cy="22" r="4"   fill="none" stroke="#f97316" stroke-width="1.8" opacity="0.6"/>
+                            <circle cx="23" cy="22" r="3" fill="#bef264"/>
+                            <path d="M 21.2 20.4 Q 23 21.9 24.8 20.4" fill="none" stroke="white" stroke-width="0.6" stroke-linecap="round" opacity="0.9"/>
+                            <path d="M 21.2 23.6 Q 23 22.1 24.8 23.6" fill="none" stroke="white" stroke-width="0.6" stroke-linecap="round" opacity="0.9"/>
+                          </svg>
+                        </div>
+                        <span><span style="color:#fff">Court</span><span style="color:#f97316">Radar</span></span>
+                      </div>
+                    </div>
+                    <div class="cr-app-body">
+                      <h3 class="cr-app-h">Find &amp; book<br>padel courts</h3>
+                      <p class="cr-app-p">All clubs in Cura&ccedil;ao, <em>one place.</em></p>
+                      <div class="cr-app-btn cr-btn-primary">Find a court &rarr;</div>
+                      <div class="cr-app-btn cr-btn-secondary">Find players &rarr;</div>
+                      <div class="cr-account-link">Create a free account</div>
+                    </div>
+                  </div>
+                  <div class="cr-stats-zone">
+                    <div class="cr-stats">
+                      <div class="cr-stat"><strong>6</strong><span>Clubs</span></div>
+                      <div class="cr-stat-sep" aria-hidden="true"></div>
+                      <div class="cr-stat"><strong>25+</strong><span>Courts</span></div>
+                      <div class="cr-stat-sep" aria-hidden="true"></div>
+                      <div class="cr-stat"><strong class="cr-stat-live">Live</strong><span>Availability</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section-cream contact-section" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="contact-left sr">
+          <div class="section-label">Get in touch</div>
+          <h2 class="section-title section-title-dark" id="contact-title">
+            Let&rsquo;s build<br>something real.
+          </h2>
+          <p class="contact-desc">
+            Tell us what you&rsquo;re working on. We reply within 24 hours.
+          </p>
+          <div class="contact-details">
+            <a href="mailto:info@cmxlabs.io" class="contact-item">
+              <div class="ci-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <span>info@cmxlabs.io</span>
+            </a>
+            <a href="tel:+59996754955" class="contact-item">
+              <div class="ci-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.18 2 2 0 012.07.1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121 14.91v2.01z"/></svg></div>
+              <span>+599 9 675 4955</span>
+            </a>
+            <div class="contact-item">
+              <div class="ci-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+              <span>Willemstad, Cura&ccedil;ao</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-right sr">
+          <form class="contact-form" id="contactForm" novalidate aria-label="Contact form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required autocomplete="name"/>
+              </div>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" placeholder="you@company.com" required autocomplete="email"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject">What are you building?</label>
+              <input type="text" id="subject" name="subject" placeholder="e.g. A booking platform for my business"/>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell us more</label>
+              <textarea id="message" name="message" rows="5" placeholder="Describe your project or idea..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-full btn-magnetic" id="submitBtn">
+              Send message &rarr;
+            </button>
+            <div class="form-success" id="formSuccess" role="alert" aria-live="polite">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Message sent. We&rsquo;ll be in touch soon.
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-brand sr">
+        <img src="assets/cmxlabs-logo-nav.svg" alt="CMX Labs" height="52"/>
+        <p class="footer-desc">A digital product studio based in Cura&ccedil;ao.<br>We design, build, and launch digital products that make an impact.</p>
+      </div>
+      <div class="footer-nav" role="navigation" aria-label="Footer navigation">
+        <div class="footer-col sr">
+          <span class="fc-title">Company</span>
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col sr">
+          <span class="fc-title">Products</span>
+          <a href="https://altrex.io" target="_blank" rel="noopener">Altrex</a>
+          <a href="https://supportelevate.vercel.app" target="_blank" rel="noopener">Elevate</a>
+          <a href="https://court-radar.vercel.app" target="_blank" rel="noopener">CourtRadar</a>
+        </div>
+        <div class="footer-col sr">
+          <span class="fc-title">Connect</span>
+          <a href="mailto:info@cmxlabs.io">info@cmxlabs.io</a>
+          <a href="tel:+59996754955">+599 9 675 4955</a>
+        </div>
+      </div>
+      <div class="footer-bottom sr">
+        <span>&copy; 2026 CMX Labs &middot; All rights reserved</span>
+        <span>Cura&ccedil;ao &#127476;&#127484;</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
