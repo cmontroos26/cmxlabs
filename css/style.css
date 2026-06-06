@@ -1325,11 +1325,11 @@ button { font-family: inherit; }
 @media (max-width: 768px) {
   :root { --nav-h: 64px; --section-pad: 72px; }
 
-  .nav.menu-open {
+  /* On mobile, nav is always solid — no expensive backdrop-filter */
+  .nav {
     background: #0e0e0c !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    border-color: transparent !important;
   }
   .nav-links {
     display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 0;
@@ -1337,19 +1337,20 @@ button { font-family: inherit; }
     background: #0e0e0c;
     padding: 56px 32px 60px; z-index: 800; margin-right: 0;
     overflow-y: auto;
-    /* hidden by default — animate in */
+    /* pre-promote to GPU layer to avoid first-frame stutter */
+    will-change: opacity, transform;
+    transform: translateY(-10px) translateZ(0);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transform: translateY(-10px);
-    transition: opacity .3s ease, transform .3s ease, visibility 0s linear .3s;
+    transition: opacity .28s ease, transform .28s ease, visibility 0s linear .28s;
   }
   .nav-links.open {
     opacity: 1;
     visibility: visible;
     pointer-events: all;
-    transform: translateY(0);
-    transition: opacity .3s ease, transform .3s ease, visibility 0s linear 0s;
+    transform: translateY(0) translateZ(0);
+    transition: opacity .28s ease, transform .28s ease, visibility 0s linear 0s;
   }
   /* stagger links on open */
   .nav-links.open li { animation: menuItemIn .35s ease both; }
