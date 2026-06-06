@@ -80,15 +80,17 @@ button { font-family: inherit; }
 .cursor, .cursor-follower {
   position: fixed; pointer-events: none; border-radius: 50%;
   transform: translate(-50%,-50%); z-index: 9999; transition: opacity .2s;
-  opacity: 0; /* hidden until JS positions them */
+  left: -200px; top: -200px; /* start off-screen, not at 0,0 */
 }
-@media (pointer: fine) {
-  .cursor { width: 7px; height: 7px; background: var(--purple-lite); }
-  .cursor-follower {
-    width: 30px; height: 30px;
-    border: 1.5px solid rgba(175,169,236,.45);
-    transition: width .2s var(--ease-spring), height .2s var(--ease-spring), border-color .2s;
-  }
+.cursor { width: 7px; height: 7px; background: var(--purple-lite); }
+.cursor-follower {
+  width: 30px; height: 30px;
+  border: 1.5px solid rgba(175,169,236,.45);
+  transition: width .2s var(--ease-spring), height .2s var(--ease-spring), border-color .2s;
+}
+/* hide on touch devices */
+@media (pointer: coarse) {
+  .cursor, .cursor-follower { display: none !important; }
 }
 .cursor.on          { background: var(--purple-mid); }
 .cursor-follower.on { width: 46px; height: 46px; border-color: rgba(175,169,236,.8); }
