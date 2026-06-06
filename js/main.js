@@ -269,23 +269,26 @@
       submitBtn.disabled  = true;
       submitBtn.style.opacity = '.65';
 
-      /*
-        TODO: Replace with real API call:
-        fetch('https://formspree.io/f/YOUR_FORM_ID', {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
-        }).then(r => r.ok ? showSuccess() : alert('Error'));
-      */
-
-      setTimeout(() => {
-        form.reset();
+      fetch('https://formspree.io/f/maqzendl', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+      .then(r => {
+        if (r.ok) {
+          form.reset();
+          successMsg.classList.add('on');
+          setTimeout(() => successMsg.classList.remove('on'), 5500);
+        } else {
+          alert('Something went wrong. Please email us directly at info@cmxlabs.io');
+        }
+      })
+      .catch(() => alert('Something went wrong. Please email us directly at info@cmxlabs.io'))
+      .finally(() => {
         submitBtn.innerHTML = orig;
         submitBtn.disabled  = false;
         submitBtn.style.opacity = '1';
-        successMsg.classList.add('on');
-        setTimeout(() => successMsg.classList.remove('on'), 5500);
-      }, 1400);
+      });
     });
 
     form.querySelectorAll('input,textarea').forEach(f => {
