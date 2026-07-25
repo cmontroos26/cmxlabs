@@ -178,81 +178,109 @@
       }, { passive: true });
 
     } else {
-      /* ── Fallback: main-thread animation ── */
-      const ctx        = pageCanvas.getContext('2d');
-      const NODE_COUNT = isMobile ? 40 : 72;
-      const LINK_DIST  = isMobile ? 150 : 180;
-      const NODE_COLS  = [
-        [83,  74,  183],
-        [45,  212, 191],
-        [127, 119, 221],
-        [175, 169, 236],
-      ];
+      /* ── Fallback: main-thread logo mark animation ── */
+      const ctx2       = pageCanvas.getContext('2d');
+      const COL_OUTER2 = [175, 169, 236];
+      const COL_INNER2 = [127, 119, 221];
+      let cw2 = 0, ch2 = 0, frame2 = 0, lastWidth2 = 0, resizeTimer2 = null;
+      const rings2 = [];
+      let ringTimer2 = 0;
 
-      let nodes = [], cw = 0, ch = 0, lastWidth = 0, resizeTimer = null;
-
-      function buildNodes() {
-        nodes = Array.from({ length: NODE_COUNT }, () => {
-          const hub = Math.random() < 0.15;
-          return {
-            x: Math.random() * cw, y: Math.random() * ch,
-            vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
-            r: hub ? (Math.random() * 2.5 + 3.5) : (Math.random() * 2.0 + 1.5),
-            col: NODE_COLS[Math.floor(Math.random() * NODE_COLS.length)],
-            phase: Math.random() * Math.PI * 2,
-            ps: 0.016 + Math.random() * 0.014, hub,
-          };
-        });
+      function rr2(x, y, w, h, r) {
+        ctx2.beginPath();
+        ctx2.moveTo(x + r, y);
+        ctx2.arcTo(x + w, y,     x + w, y + h, r);
+        ctx2.arcTo(x + w, y + h, x,     y + h, r);
+        ctx2.arcTo(x,     y + h, x,     y,     r);
+        ctx2.arcTo(x,     y,     x + w, y,     r);
+        ctx2.closePath();
       }
 
-      function resizeCanvas() {
+      function resizeCanvas2() {
         const w = window.innerWidth;
-        if (w === lastWidth && cw !== 0) return;
-        lastWidth = w;
-        cw = pageCanvas.width  = w;
-        ch = pageCanvas.height = window.innerHeight;
-        buildNodes();
+        if (w === lastWidth2 && cw2 !== 0) return;
+        lastWidth2 = w;
+        cw2 = pageCanvas.width  = w;
+        ch2 = pageCanvas.height = window.innerHeight;
+        rings2.length = 0; ringTimer2 = 0;
       }
 
-      function drawFrame() {
-        ctx.clearRect(0, 0, cw, ch);
-        nodes.forEach(n => {
-          n.x += n.vx; n.y += n.vy; n.phase += n.ps;
-          if (n.x < 0) n.x = cw; if (n.x > cw) n.x = 0;
-          if (n.y < 0) n.y = ch; if (n.y > ch) n.y = 0;
-        });
-        ctx.lineWidth = 1;
-        for (let i = 0; i < nodes.length; i++) {
-          for (let j = i + 1; j < nodes.length; j++) {
-            const a = nodes[i], b = nodes[j];
-            const dx = a.x - b.x, dy = a.y - b.y;
-            const d  = Math.sqrt(dx * dx + dy * dy);
-            if (d < LINK_DIST) {
-              const [r, g, bl] = a.col;
-              ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-              ctx.strokeStyle = `rgba(${r},${g},${bl},${(1 - d / LINK_DIST) * 0.40})`;
-              ctx.stroke();
-            }
-          }
+      function drawLogoFrame() {
+        frame2++;
+        ctx2.clearRect(0, 0, cw2, ch2);
+
+        const cx   = cw2 / 2;
+        const cy   = ch2 * 0.46;
+        const base = isMobile ? 260 : 460;
+        const sc   = base / 52;
+        const outerRot = (frame2 / 3600) * Math.PI * 2;
+        const innerRot = -(frame2 / 5400) * Math.PI * 2;
+        const [or, og, ob] = COL_OUTER2;
+        const [ir, ig, ib] = COL_INNER2;
+
+        /* Radial glow */
+        const grad = ctx2.createRadialGradient(cx, cy, 0, cx, cy, base * 1.15);
+        grad.addColorStop(0,    `rgba(${ir},${ig},${ib},0.052)`);
+        grad.addColorStop(0.50, `rgba(${ir},${ig},${ib},0.018)`);
+        grad.addColorStop(1,    `rgba(${ir},${ig},${ib},0)`);
+        ctx2.fillStyle = grad;
+        ctx2.beginPath(); ctx2.arc(cx, cy, base * 1.15, 0, Math.PI * 2); ctx2.fill();
+
+        /* Outer diamond */
+        ctx2.save(); ctx2.translate(cx, cy); ctx2.rotate(Math.PI / 4 + outerRot);
+        ctx2.strokeStyle = `rgba(${or},${og},${ob},0.10)`;
+        ctx2.lineWidth   = 2.5 * (sc / 7);
+        rr2(-26 * sc, -26 * sc, 52 * sc, 52 * sc, 7 * sc);
+        ctx2.stroke(); ctx2.restore();
+
+        /* Inner diamond */
+        ctx2.save(); ctx2.translate(cx, cy); ctx2.rotate(Math.PI / 4 + innerRot);
+        ctx2.fillStyle   = `rgba(${ir},${ig},${ib},0.032)`;
+        ctx2.strokeStyle = `rgba(${ir},${ig},${ib},0.085)`;
+        ctx2.lineWidth   = 1.8 * (sc / 7);
+        rr2(-22 * sc, -22 * sc, 44 * sc, 44 * sc, 6 * sc);
+        ctx2.fill(); ctx2.stroke(); ctx2.restore();
+
+        /* Orbit ring */
+        ctx2.beginPath(); ctx2.arc(cx, cy, 13 * sc, 0, Math.PI * 2);
+        ctx2.strokeStyle = `rgba(${or},${og},${ob},0.08)`;
+        ctx2.lineWidth   = 0.7 * (sc / 7); ctx2.stroke();
+
+        /* Center circle */
+        const pulse = 0.78 + Math.sin(frame2 * 0.045) * 0.22;
+        ctx2.beginPath(); ctx2.arc(cx, cy, 6 * sc, 0, Math.PI * 2);
+        ctx2.fillStyle = `rgba(${or},${og},${ob},${0.42 * pulse})`; ctx2.fill();
+
+        /* Inner dot */
+        ctx2.beginPath(); ctx2.arc(cx, cy, 2.8 * sc, 0, Math.PI * 2);
+        ctx2.fillStyle = `rgba(255,255,255,0.32)`; ctx2.fill();
+
+        /* Pulse rings */
+        ringTimer2++;
+        if (ringTimer2 >= 90) {
+          ringTimer2 = 0;
+          rings2.push({ r: 8 * sc, maxR: isMobile ? 180 : 310 });
         }
-        nodes.forEach(n => {
-          const [r, g, bl] = n.col;
-          const opacity = 0.65 + Math.sin(n.phase) * 0.28;
-          if (n.hub && !isMobile) { ctx.shadowBlur = 12; ctx.shadowColor = `rgba(${r},${g},${bl},0.7)`; }
-          ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${r},${g},${bl},${opacity})`; ctx.fill();
-          if (n.hub && !isMobile) { ctx.shadowBlur = 0; ctx.shadowColor = 'transparent'; }
-        });
-        requestAnimationFrame(drawFrame);
+        for (let i = rings2.length - 1; i >= 0; i--) {
+          const ring = rings2[i];
+          ring.r += isMobile ? 0.65 : 1.0;
+          const progress = ring.r / ring.maxR;
+          if (progress >= 1) { rings2.splice(i, 1); continue; }
+          ctx2.beginPath(); ctx2.arc(cx, cy, ring.r, 0, Math.PI * 2);
+          ctx2.strokeStyle = `rgba(${or},${og},${ob},${0.13 * (1 - progress)})`;
+          ctx2.lineWidth = 1.2; ctx2.stroke();
+        }
+
+        requestAnimationFrame(drawLogoFrame);
       }
 
       window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(resizeCanvas, 250);
+        clearTimeout(resizeTimer2);
+        resizeTimer2 = setTimeout(resizeCanvas2, 250);
       }, { passive: true });
 
-      resizeCanvas();
-      requestAnimationFrame(drawFrame);
+      resizeCanvas2();
+      requestAnimationFrame(drawLogoFrame);
     }
   }
 
