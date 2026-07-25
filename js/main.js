@@ -178,22 +178,54 @@
       }, { passive: true });
 
     } else {
-      /* ── Fallback: main-thread logo mark animation ── */
-      const ctx2       = pageCanvas.getContext('2d');
-      const COL_OUTER2 = [175, 169, 236];
-      const COL_INNER2 = [127, 119, 221];
-      let cw2 = 0, ch2 = 0, frame2 = 0, lastWidth2 = 0, resizeTimer2 = null;
-      const rings2 = [];
-      let ringTimer2 = 0;
+      /* ── Fallback: main-thread diamond particle ring ── */
+      const ctx2   = pageCanvas.getContext('2d');
+      const TILT2  = 0.46;
+      const SPIN2  = 0.00016;
+      let spin2    = 0;
+      let cw2 = 0, ch2 = 0, lastWidth2 = 0, resizeTimer2 = null;
 
-      function rr2(x, y, w, h, r) {
-        ctx2.beginPath();
-        ctx2.moveTo(x + r, y);
-        ctx2.arcTo(x + w, y,     x + w, y + h, r);
-        ctx2.arcTo(x + w, y + h, x,     y + h, r);
-        ctx2.arcTo(x,     y + h, x,     y,     r);
-        ctx2.arcTo(x,     y,     x + w, y,     r);
-        ctx2.closePath();
+      const COLS2 = [
+        [210, 207, 248],
+        [175, 169, 236],
+        [127, 119, 221],
+        [238, 236, 255],
+      ];
+
+      let mainP2 = [], tailP2 = [];
+
+      function diamondPt2(t, R) {
+        const seg = Math.floor(t * 4) % 4;
+        const u   = (t * 4) % 1;
+        const C   = [[0,-1],[1,0],[0,1],[-1,0]];
+        const a = C[seg], b = C[(seg+1)%4];
+        return { x:(a[0]+(b[0]-a[0])*u)*R, z:(a[1]+(b[1]-a[1])*u)*R };
+      }
+
+      function project2(x3, y3, z3, cx, cy) {
+        const cs = Math.cos(spin2), ss = Math.sin(spin2);
+        const rx = x3*cs + z3*ss, ry = y3, rz = -x3*ss + z3*cs;
+        const ct = Math.cos(TILT2), st = Math.sin(TILT2);
+        return { sx: cx+rx, sy: cy+ry*ct-rz*st, depth: ry*st+rz*ct };
+      }
+
+      function buildP2() {
+        const COUNT = isMobile ? 300 : 600;
+        const TAIL  = isMobile ?  65 : 130;
+        const R     = isMobile ? 180 : 330;
+        mainP2 = Array.from({ length: COUNT }, () => {
+          const col = COLS2[Math.random()<0.06?3:Math.random()<0.25?2:Math.random()<0.5?1:0];
+          return { t:Math.random(), speed:0.00032+Math.random()*0.00052,
+            scatter:(Math.random()-0.5)*38, scY:(Math.random()-0.5)*18,
+            size:0.4+Math.random()*(Math.random()<0.08?2.2:1.0),
+            alpha:0.32+Math.random()*0.58, col, R:R+(Math.random()-0.5)*32 };
+        });
+        tailP2 = Array.from({ length: TAIL }, () => ({
+          t:Math.random(), speed:0.0008+Math.random()*0.0013,
+          size:0.3+Math.random()*0.9, alpha:0.16+Math.random()*0.36,
+          col:COLS2[Math.random()<0.4?1:0],
+          scX:(Math.random()-0.5)*18, scY:(Math.random()-0.5)*9, R
+        }));
       }
 
       function resizeCanvas2() {
@@ -202,76 +234,43 @@
         lastWidth2 = w;
         cw2 = pageCanvas.width  = w;
         ch2 = pageCanvas.height = window.innerHeight;
-        rings2.length = 0; ringTimer2 = 0;
+        buildP2();
       }
 
-      function drawLogoFrame() {
-        frame2++;
+      function drawRingFrame() {
         ctx2.clearRect(0, 0, cw2, ch2);
-
-        const cx   = cw2 / 2;
-        const cy   = ch2 * 0.46;
-        const base = isMobile ? 260 : 460;
-        const sc   = base / 52;
-        const outerRot = (frame2 / 3600) * Math.PI * 2;
-        const innerRot = -(frame2 / 5400) * Math.PI * 2;
-        const [or, og, ob] = COL_OUTER2;
-        const [ir, ig, ib] = COL_INNER2;
-
-        /* Radial glow */
-        const grad = ctx2.createRadialGradient(cx, cy, 0, cx, cy, base * 1.15);
-        grad.addColorStop(0,    `rgba(${ir},${ig},${ib},0.052)`);
-        grad.addColorStop(0.50, `rgba(${ir},${ig},${ib},0.018)`);
-        grad.addColorStop(1,    `rgba(${ir},${ig},${ib},0)`);
-        ctx2.fillStyle = grad;
-        ctx2.beginPath(); ctx2.arc(cx, cy, base * 1.15, 0, Math.PI * 2); ctx2.fill();
-
-        /* Outer diamond */
-        ctx2.save(); ctx2.translate(cx, cy); ctx2.rotate(Math.PI / 4 + outerRot);
-        ctx2.strokeStyle = `rgba(${or},${og},${ob},0.10)`;
-        ctx2.lineWidth   = 2.5 * (sc / 7);
-        rr2(-26 * sc, -26 * sc, 52 * sc, 52 * sc, 7 * sc);
-        ctx2.stroke(); ctx2.restore();
-
-        /* Inner diamond */
-        ctx2.save(); ctx2.translate(cx, cy); ctx2.rotate(Math.PI / 4 + innerRot);
-        ctx2.fillStyle   = `rgba(${ir},${ig},${ib},0.032)`;
-        ctx2.strokeStyle = `rgba(${ir},${ig},${ib},0.085)`;
-        ctx2.lineWidth   = 1.8 * (sc / 7);
-        rr2(-22 * sc, -22 * sc, 44 * sc, 44 * sc, 6 * sc);
-        ctx2.fill(); ctx2.stroke(); ctx2.restore();
-
-        /* Orbit ring */
-        ctx2.beginPath(); ctx2.arc(cx, cy, 13 * sc, 0, Math.PI * 2);
-        ctx2.strokeStyle = `rgba(${or},${og},${ob},0.08)`;
-        ctx2.lineWidth   = 0.7 * (sc / 7); ctx2.stroke();
-
-        /* Center circle */
-        const pulse = 0.78 + Math.sin(frame2 * 0.045) * 0.22;
-        ctx2.beginPath(); ctx2.arc(cx, cy, 6 * sc, 0, Math.PI * 2);
-        ctx2.fillStyle = `rgba(${or},${og},${ob},${0.42 * pulse})`; ctx2.fill();
-
-        /* Inner dot */
-        ctx2.beginPath(); ctx2.arc(cx, cy, 2.8 * sc, 0, Math.PI * 2);
-        ctx2.fillStyle = `rgba(255,255,255,0.32)`; ctx2.fill();
-
-        /* Pulse rings */
-        ringTimer2++;
-        if (ringTimer2 >= 90) {
-          ringTimer2 = 0;
-          rings2.push({ r: 8 * sc, maxR: isMobile ? 180 : 310 });
+        spin2 += SPIN2;
+        const cx = cw2/2, cy = ch2*0.52;
+        for (const p of mainP2) {
+          p.t = (p.t + p.speed) % 1;
+          const dp = diamondPt2(p.t, p.R);
+          const rLen = Math.sqrt(dp.x*dp.x + dp.z*dp.z) || 1;
+          const { sx, sy, depth } = project2(dp.x+(dp.x/rLen)*p.scatter, p.scY, dp.z+(dp.z/rLen)*p.scatter, cx, cy);
+          const dN    = Math.max(0, Math.min(1, (depth+p.R)/(2*p.R)));
+          const alpha = p.alpha*(0.16+dN*0.84);
+          const size  = p.size *(0.38+dN*0.70);
+          if (alpha<0.015||size<0.1) continue;
+          const [r,g,b] = p.col;
+          ctx2.beginPath(); ctx2.arc(sx, sy, size, 0, Math.PI*2);
+          ctx2.fillStyle = `rgba(${r},${g},${b},${alpha})`; ctx2.fill();
         }
-        for (let i = rings2.length - 1; i >= 0; i--) {
-          const ring = rings2[i];
-          ring.r += isMobile ? 0.65 : 1.0;
-          const progress = ring.r / ring.maxR;
-          if (progress >= 1) { rings2.splice(i, 1); continue; }
-          ctx2.beginPath(); ctx2.arc(cx, cy, ring.r, 0, Math.PI * 2);
-          ctx2.strokeStyle = `rgba(${or},${og},${ob},${0.13 * (1 - progress)})`;
-          ctx2.lineWidth = 1.2; ctx2.stroke();
+        const R0 = isMobile ? 180 : 330;
+        const { sx:tsx, sy:tsy } = project2(0, 0, -R0, cx, cy);
+        const bx3=cx+R0*1.75, by3=cy-R0*0.80;
+        const bx1=tsx+(bx3-tsx)*0.18, by1=tsy+(by3-tsy)*0.12-R0*0.12;
+        const bx2=tsx+(bx3-tsx)*0.62, by2=tsy+(by3-tsy)*0.52;
+        for (const p of tailP2) {
+          p.t = (p.t + p.speed) % 1;
+          const t=p.t, mt=1-t;
+          const bx=mt*mt*mt*tsx+3*mt*mt*t*bx1+3*mt*t*t*bx2+t*t*t*bx3;
+          const by=mt*mt*mt*tsy+3*mt*mt*t*by1+3*mt*t*t*by2+t*t*t*by3;
+          const alpha=p.alpha*(1-t*0.88), size=p.size*(1-t*0.52);
+          if (alpha<0.015||size<0.1) continue;
+          const [r,g,b] = p.col;
+          ctx2.beginPath(); ctx2.arc(bx+p.scX, by+p.scY, size, 0, Math.PI*2);
+          ctx2.fillStyle = `rgba(${r},${g},${b},${alpha})`; ctx2.fill();
         }
-
-        requestAnimationFrame(drawLogoFrame);
+        requestAnimationFrame(drawRingFrame);
       }
 
       window.addEventListener('resize', () => {
@@ -280,7 +279,7 @@
       }, { passive: true });
 
       resizeCanvas2();
-      requestAnimationFrame(drawLogoFrame);
+      requestAnimationFrame(drawRingFrame);
     }
   }
 
