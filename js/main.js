@@ -212,7 +212,7 @@
       function buildP2() {
         const COUNT = isMobile ? 300 : 600;
         const TAIL  = isMobile ?  65 : 130;
-        const R     = isMobile ? 180 : 330;
+        const R     = isMobile ? 260 : 480;
         mainP2 = Array.from({ length: COUNT }, () => {
           const col = COLS2[Math.random()<0.06?3:Math.random()<0.25?2:Math.random()<0.5?1:0];
           return { t:Math.random(), speed:0.00032+Math.random()*0.00052,
@@ -254,7 +254,7 @@
           ctx2.beginPath(); ctx2.arc(sx, sy, size, 0, Math.PI*2);
           ctx2.fillStyle = `rgba(${r},${g},${b},${alpha})`; ctx2.fill();
         }
-        const R0 = isMobile ? 180 : 330;
+        const R0 = isMobile ? 260 : 480;
         const { sx:tsx, sy:tsy } = project2(0, 0, -R0, cx, cy);
         const bx3=cx+R0*1.75, by3=cy-R0*0.80;
         const bx1=tsx+(bx3-tsx)*0.18, by1=tsy+(by3-tsy)*0.12-R0*0.12;

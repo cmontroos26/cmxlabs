@@ -58,7 +58,7 @@ function project(x3, y3, z3, cx, cy) {
 function buildParticles() {
   const COUNT = isMobile ? 300 : 600;
   const TAIL  = isMobile ?  65 : 130;
-  const R     = isMobile ? 180 : 330;
+  const R     = isMobile ? 260 : 480;
 
   mainP = Array.from({ length: COUNT }, () => {
     const col = COLS[
@@ -130,7 +130,7 @@ function drawFrame() {
   /* ── Comet tail ───────────────────────────────────────────── */
   /* Attach tail to the "top" corner of the diamond (local: x=0, z=-R).
      The bezier destination drifts toward the upper-right in screen space. */
-  const R0 = isMobile ? 180 : 330;
+  const R0 = isMobile ? 260 : 480;
   const { sx: tsx, sy: tsy } = project(0, 0, -R0, cx, cy);
 
   /* Fixed destination — upper-right quadrant */
