@@ -95,9 +95,9 @@
      6. SCROLL REVEAL — staggered IntersectionObserver
   ---------------------------------------------------------- */
   // Stagger delays for card/list containers
-  document.querySelectorAll('.footer-nav, .svc-blocks, .metrics-inner').forEach(parent => {
-    parent.querySelectorAll(':scope > .sr, :scope > .metric, :scope > .svc-block').forEach((el, i) => {
-      el.style.setProperty('--delay', (i * 0.1) + 's');
+  document.querySelectorAll('.footer-nav, .bento-grid, .pillars-grid, .process-steps').forEach(parent => {
+    parent.querySelectorAll(':scope > .sr').forEach((el, i) => {
+      el.style.setProperty('--delay', (i * 0.06) + 's');
     });
   });
 
@@ -108,7 +108,7 @@
         srObserver.unobserve(e.target);
       }
     });
-  }, { threshold: 0.07, rootMargin: '0px 0px -24px 0px' });
+  }, { threshold: 0.01, rootMargin: '0px 0px 300px 0px' });
 
   document.querySelectorAll('.sr').forEach(el => srObserver.observe(el));
 
@@ -143,104 +143,143 @@
   }
 
   /* ----------------------------------------------------------
-     10. HERO CANVAS — neural network mesh
+     10. PAGE CANVAS — neural network mesh (Web Worker / OffscreenCanvas)
   ---------------------------------------------------------- */
-  const heroCanvas = document.getElementById('heroCanvas');
-  if (heroCanvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const ctx = heroCanvas.getContext('2d');
+  const pageCanvas = document.getElementById('pageCanvas');
+  if (pageCanvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 
-    const NODE_COUNT = 72;
-    const LINK_DIST  = 180;
-    const NODE_COLS  = [
-      [83,  74,  183],  // brand purple
-      [45,  212, 191],  // teal
-      [127, 119, 221],  // light purple
-      [175, 169, 236],  // lavender
-    ];
+    const isMobile = window.matchMedia('(pointer: coarse)').matches;
 
-    let nodes = [], cw = 0, ch = 0;
+    // Set canvas dimensions before anything else
+    pageCanvas.width  = window.innerWidth;
+    pageCanvas.height = window.innerHeight;
 
-    function buildNodes() {
-      nodes = Array.from({ length: NODE_COUNT }, () => {
-        const hub = Math.random() < 0.15; // 15% are larger hub nodes
-        return {
-          x:  Math.random() * cw,
-          y:  Math.random() * ch,
-          vx: (Math.random() - 0.5) * 0.28,
-          vy: (Math.random() - 0.5) * 0.28,
-          r:  hub ? (Math.random() * 2.5 + 3.5) : (Math.random() * 2.0 + 1.5),
-          col: NODE_COLS[Math.floor(Math.random() * NODE_COLS.length)],
-          phase: Math.random() * Math.PI * 2,
-          ps:   0.016 + Math.random() * 0.014,
-          hub,
-        };
-      });
-    }
+    const supportsOffscreen = typeof OffscreenCanvas !== 'undefined' &&
+                              typeof pageCanvas.transferControlToOffscreen === 'function';
 
-    function resizeCanvas() {
-      cw = heroCanvas.width  = heroCanvas.offsetWidth;
-      ch = heroCanvas.height = heroCanvas.offsetHeight;
-      buildNodes();
-    }
+    if (supportsOffscreen) {
+      /* ── Worker path: canvas runs on its own thread ── */
+      const offscreen = pageCanvas.transferControlToOffscreen();
+      const worker    = new Worker('js/canvas-worker.js');
 
-    function drawFrame() {
-      ctx.clearRect(0, 0, cw, ch);
+      worker.postMessage({ type: 'init', canvas: offscreen, isMobile }, [offscreen]);
 
-      // Move nodes, wrap edges
-      nodes.forEach(n => {
-        n.x += n.vx;
-        n.y += n.vy;
-        n.phase += n.ps;
-        if (n.x < 0)  n.x = cw;
-        if (n.x > cw) n.x = 0;
-        if (n.y < 0)  n.y = ch;
-        if (n.y > ch) n.y = 0;
-      });
+      let lastWidth   = window.innerWidth;
+      let resizeTimer = null;
 
-      // Draw connections
-      ctx.lineWidth = 1;
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i], b = nodes[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
-          const d  = Math.sqrt(dx * dx + dy * dy);
-          if (d < LINK_DIST) {
-            const alpha = (1 - d / LINK_DIST) * 0.40;
-            const [r, g, bl] = a.col;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(${r},${g},${bl},${alpha})`;
-            ctx.stroke();
-          }
-        }
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const w = window.innerWidth;
+          if (w === lastWidth) return;
+          lastWidth = w;
+          worker.postMessage({ type: 'resize', width: w, height: window.innerHeight });
+        }, 250);
+      }, { passive: true });
+
+    } else {
+      /* ── Fallback: main-thread animation ── */
+      const ctx        = pageCanvas.getContext('2d');
+      const NODE_COUNT = isMobile ? 40 : 72;
+      const LINK_DIST  = isMobile ? 150 : 180;
+      const NODE_COLS  = [
+        [83,  74,  183],
+        [45,  212, 191],
+        [127, 119, 221],
+        [175, 169, 236],
+      ];
+
+      let nodes = [], cw = 0, ch = 0, lastWidth = 0, resizeTimer = null;
+
+      function buildNodes() {
+        nodes = Array.from({ length: NODE_COUNT }, () => {
+          const hub = Math.random() < 0.15;
+          return {
+            x: Math.random() * cw, y: Math.random() * ch,
+            vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
+            r: hub ? (Math.random() * 2.5 + 3.5) : (Math.random() * 2.0 + 1.5),
+            col: NODE_COLS[Math.floor(Math.random() * NODE_COLS.length)],
+            phase: Math.random() * Math.PI * 2,
+            ps: 0.016 + Math.random() * 0.014, hub,
+          };
+        });
       }
 
-      // Draw nodes (hub nodes get a glow)
-      nodes.forEach(n => {
-        const [r, g, bl] = n.col;
-        const opacity = 0.65 + Math.sin(n.phase) * 0.28;
-        if (n.hub) {
-          ctx.shadowBlur  = 12;
-          ctx.shadowColor = `rgba(${r},${g},${bl},0.7)`;
-        }
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r},${g},${bl},${opacity})`;
-        ctx.fill();
-        if (n.hub) {
-          ctx.shadowBlur  = 0;
-          ctx.shadowColor = 'transparent';
-        }
-      });
+      function resizeCanvas() {
+        const w = window.innerWidth;
+        if (w === lastWidth && cw !== 0) return;
+        lastWidth = w;
+        cw = pageCanvas.width  = w;
+        ch = pageCanvas.height = window.innerHeight;
+        buildNodes();
+      }
 
+      function drawFrame() {
+        ctx.clearRect(0, 0, cw, ch);
+        nodes.forEach(n => {
+          n.x += n.vx; n.y += n.vy; n.phase += n.ps;
+          if (n.x < 0) n.x = cw; if (n.x > cw) n.x = 0;
+          if (n.y < 0) n.y = ch; if (n.y > ch) n.y = 0;
+        });
+        ctx.lineWidth = 1;
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const a = nodes[i], b = nodes[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const d  = Math.sqrt(dx * dx + dy * dy);
+            if (d < LINK_DIST) {
+              const [r, g, bl] = a.col;
+              ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = `rgba(${r},${g},${bl},${(1 - d / LINK_DIST) * 0.40})`;
+              ctx.stroke();
+            }
+          }
+        }
+        nodes.forEach(n => {
+          const [r, g, bl] = n.col;
+          const opacity = 0.65 + Math.sin(n.phase) * 0.28;
+          if (n.hub && !isMobile) { ctx.shadowBlur = 12; ctx.shadowColor = `rgba(${r},${g},${bl},0.7)`; }
+          ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${r},${g},${bl},${opacity})`; ctx.fill();
+          if (n.hub && !isMobile) { ctx.shadowBlur = 0; ctx.shadowColor = 'transparent'; }
+        });
+        requestAnimationFrame(drawFrame);
+      }
+
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resizeCanvas, 250);
+      }, { passive: true });
+
+      resizeCanvas();
       requestAnimationFrame(drawFrame);
     }
+  }
 
-    const ro = new ResizeObserver(resizeCanvas);
-    ro.observe(heroCanvas);
-    resizeCanvas();
-    requestAnimationFrame(drawFrame);
+  /* ----------------------------------------------------------
+     8. ANIMATED COUNTERS — count up on scroll into view
+  ---------------------------------------------------------- */
+  const counterEls = document.querySelectorAll('.stat-num[data-target]');
+  if (counterEls.length) {
+    const counterObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        counterObs.unobserve(e.target);
+        const el       = e.target;
+        const target   = +el.dataset.target;
+        const prefix   = el.dataset.prefix || '';
+        const suffix   = el.dataset.suffix || '';
+        const duration = 1400;
+        const start    = performance.now();
+        (function tick(now) {
+          const p    = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - p, 3);
+          el.textContent = prefix + Math.round(ease * target) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        })(start);
+      });
+    }, { threshold: 0.6 });
+    counterEls.forEach(el => counterObs.observe(el));
   }
 
   /* ----------------------------------------------------------

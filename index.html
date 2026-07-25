@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CMX Labs — Digital Product Studio</title>
+  <title>CMX Labs | Digital Product Studio</title>
   <meta name="description" content="CMX Labs is a digital product studio based in Curaçao. We design, build, and launch digital products that perform."/>
   <meta name="theme-color" content="#111110"/>
   <link rel="icon" type="image/svg+xml" href="assets/cmxlabs-favicon.svg"/>
@@ -17,10 +17,13 @@
   <div class="cursor" id="cursor" aria-hidden="true"></div>
   <div class="cursor-follower" id="follower" aria-hidden="true"></div>
 
+  <!-- FULL-PAGE ANIMATED CANVAS -->
+  <canvas class="page-canvas" id="pageCanvas" aria-hidden="true"></canvas>
+
   <!-- NAV -->
   <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="#home" class="nav-logo" aria-label="CMX Labs — Home">
+      <a href="#home" class="nav-logo" aria-label="CMX Labs home">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 88" height="52" aria-label="CMX Labs" role="img">
           <rect x="16" y="18" width="52" height="52" rx="7" fill="none" stroke="#AFA9EC" stroke-width="2.5" transform="rotate(45 42 44)"/>
           <rect x="40" y="23" width="44" height="44" rx="6" fill="#7F77DD" fill-opacity="0.18" stroke="#7F77DD" stroke-width="1.8" transform="rotate(45 62 45)"/>
@@ -36,9 +39,16 @@
       </a>
       <ul class="nav-links" id="navLinks" role="list">
         <li><a href="#services" class="nav-link">Services</a></li>
-        <li><a href="#work"     class="nav-link">Work</a></li>
+        <li><a href="#process"  class="nav-link">Process</a></li>
         <li><a href="#contact"  class="nav-link">Contact</a></li>
-        <li class="nav-mobile-cta"><a href="#contact" class="btn btn-nav-cta nav-link">Start a project</a></li>
+        <li class="nav-mobile-cta"><a href="#contact" class="btn btn-primary btn-lg nav-link">Start a project &rarr;</a></li>
+        <li class="nav-menu-footer" aria-hidden="true">
+          <div class="nav-footer-row">
+            <a href="mailto:info@cmxlabs.io">info@cmxlabs.io</a>
+            <span>Willemstad, Cura&ccedil;ao</span>
+          </div>
+          <span>&copy; 2026 CMX Labs</span>
+        </li>
       </ul>
       <a href="#contact" class="btn btn-nav-cta nav-cta">Start a project</a>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
@@ -49,10 +59,8 @@
 
   <!-- HERO -->
   <section class="hero" id="home" aria-label="Hero">
-    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
     <div class="hero-noise"    aria-hidden="true"></div>
     <div class="hero-vignette" aria-hidden="true"></div>
-    <div class="hero-fade" aria-hidden="true"></div>
 
     <div class="container hero-center">
 
@@ -73,162 +81,142 @@
 
       <div class="hero-ctas">
         <a href="#contact" class="btn btn-primary btn-xl btn-magnetic">Start a project &rarr;</a>
-        <a href="#work"    class="btn btn-ghost  btn-xl">See our work</a>
+        <a href="#process" class="btn btn-ghost  btn-xl">How we work</a>
       </div>
 
+      <div class="hero-mockup" aria-hidden="true">
+        <div class="hm-chrome">
+          <div class="hm-dots">
+            <span class="hm-dot"></span>
+            <span class="hm-dot"></span>
+            <span class="hm-dot"></span>
+          </div>
+          <span class="hm-address">studio.cmxlabs.io &nbsp;/&nbsp; capabilities</span>
+        </div>
+        <div class="hm-body">
+          <div class="hm-header">
+            <span class="hm-title">What we build</span>
+            <span class="hm-badge">Open</span>
+          </div>
+          <div class="hm-project">
+            <span class="hm-status hm-live"></span>
+            <span class="hm-pname">Web Platforms</span>
+            <span class="hm-tag">Full-stack</span>
+          </div>
+          <div class="hm-project">
+            <span class="hm-status hm-live"></span>
+            <span class="hm-pname">SaaS Products</span>
+            <span class="hm-tag">Full-stack</span>
+          </div>
+          <div class="hm-project">
+            <span class="hm-status hm-live"></span>
+            <span class="hm-pname">Mobile Apps</span>
+            <span class="hm-tag">Full-stack</span>
+          </div>
+          <div class="hm-divider"></div>
+          <div class="hm-stats">
+            <div class="hm-stat"><span class="hm-stat-n">Design</span><span class="hm-stat-l">+ Dev</span></div>
+            <div class="hm-stat"><span class="hm-stat-n">Zero</span><span class="hm-stat-l">to launch</span></div>
+            <div class="hm-stat"><span class="hm-stat-n">Fast</span><span class="hm-stat-l">delivery</span></div>
+          </div>
+        </div>
+      </div>
 
     </div>
   </section>
 
+  <!-- TECH STACK MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span>React</span><span class="mq-sep">·</span>
+      <span>Next.js</span><span class="mq-sep">·</span>
+      <span>TypeScript</span><span class="mq-sep">·</span>
+      <span>Supabase</span><span class="mq-sep">·</span>
+      <span>Stripe</span><span class="mq-sep">·</span>
+      <span>Vercel</span><span class="mq-sep">·</span>
+      <span>Node.js</span><span class="mq-sep">·</span>
+      <span>Figma</span><span class="mq-sep">·</span>
+      <span>PostgreSQL</span><span class="mq-sep">·</span>
+      <span>Tailwind&nbsp;CSS</span><span class="mq-sep">·</span>
+      <span>React Native</span><span class="mq-sep">·</span>
+      <span>React</span><span class="mq-sep">·</span>
+      <span>Next.js</span><span class="mq-sep">·</span>
+      <span>TypeScript</span><span class="mq-sep">·</span>
+      <span>Supabase</span><span class="mq-sep">·</span>
+      <span>Stripe</span><span class="mq-sep">·</span>
+      <span>Vercel</span><span class="mq-sep">·</span>
+      <span>Node.js</span><span class="mq-sep">·</span>
+      <span>Figma</span><span class="mq-sep">·</span>
+      <span>PostgreSQL</span><span class="mq-sep">·</span>
+      <span>Tailwind&nbsp;CSS</span><span class="mq-sep">·</span>
+      <span>React Native</span><span class="mq-sep">·</span>
+    </div>
+  </div>
+
   <!-- CMX MEANING -->
-  <section class="cmx-section section-cream" aria-label="What CMX stands for">
+  <section class="cmx-section" aria-label="What CMX stands for">
     <div class="container">
       <div class="fc-header sr">
         <div class="section-label">What CMX stands for</div>
       </div>
 
-      <!-- C · M · X — three equal cards -->
-      <div class="fc-row-3">
+      <div class="cmx-cols">
 
-        <!-- C — Command -->
-        <div class="fc-card sr">
-          <div class="fc-card-head">
-            <span class="fc-card-title">C<span class="fc-title-sep">:</span> Command</span>
-            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="fc-visual fc-c-vis">
-            <div class="fc-terminal">
-              <div class="fc-term-bar">
-                <span class="fc-tdot fc-tdot-r"></span>
-                <span class="fc-tdot fc-tdot-y"></span>
-                <span class="fc-tdot fc-tdot-g"></span>
-              </div>
-              <div class="fc-term-body">
-                <div class="fc-tline"><span class="fc-prompt">$</span> cmx init --project</div>
-                <div class="fc-tline fc-tgray">Initializing workspace...</div>
-                <div class="fc-tline fc-tgreen">&#10003; Project ready.</div>
-                <div class="fc-tline fc-tblue">&#10003; Stack configured.</div>
-                <div class="fc-tline"><span class="fc-prompt">$</span> <span class="fc-cursor"></span></div>
-              </div>
-            </div>
-            <p class="fc-tagline">Lead with authority. Every solution is purposeful, not accidental.</p>
+        <!-- C -->
+        <div class="cmx-col sr" data-letter="C">
+          <span class="cmx-letter" aria-hidden="true">C</span>
+          <div class="cmx-col-name">Command</div>
+          <p class="cmx-col-desc">Every decision is intentional. We lead with purpose, never guesswork.</p>
+          <div class="cmx-col-chips">
+            <span>Strategic</span><span>Precise</span><span>Intentional</span>
           </div>
         </div>
 
-        <!-- M — Modern -->
-        <div class="fc-card sr">
-          <div class="fc-card-head">
-            <span class="fc-card-title">M<span class="fc-title-sep">:</span> Modern</span>
-            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="fc-visual fc-m-vis">
-            <div class="fc-tech-grid">
-              <span class="fc-pill">React</span>
-              <span class="fc-pill">TypeScript</span>
-              <span class="fc-pill">Next.js</span>
-              <span class="fc-pill">Node.js</span>
-              <span class="fc-pill">Tailwind</span>
-              <span class="fc-pill">Postgres</span>
-              <span class="fc-pill">Vercel</span>
-              <span class="fc-pill">Stripe</span>
-            </div>
-            <p class="fc-tagline fc-tagline-dark">Built for today and tomorrow. No legacy thinking, always forward.</p>
+        <!-- M -->
+        <div class="cmx-col sr" data-letter="M">
+          <span class="cmx-letter" aria-hidden="true">M</span>
+          <div class="cmx-col-name">Modern</div>
+          <p class="cmx-col-desc">Modern stack, clean code, no shortcuts. Built for now and what comes next.</p>
+          <div class="cmx-col-chips">
+            <span>React</span><span>Next.js</span><span>TypeScript</span>
           </div>
         </div>
 
-        <!-- X — Xecution -->
-        <div class="fc-card sr">
-          <div class="fc-card-head">
-            <span class="fc-card-title">X<span class="fc-title-sep">:</span> Xecution</span>
-            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="fc-visual fc-x-vis">
-            <div class="fc-checklist">
-              <div class="fc-check fc-done">Design</div>
-              <div class="fc-check fc-done">Development</div>
-              <div class="fc-check fc-done">Testing</div>
-              <div class="fc-check fc-ship">Shipped &rarr;</div>
-            </div>
-            <p class="fc-tagline">Ideas are nothing without delivery. CMX ships: fast, clean, smart.</p>
+        <!-- X -->
+        <div class="cmx-col sr" data-letter="X">
+          <span class="cmx-letter" aria-hidden="true">X</span>
+          <div class="cmx-col-name">Xecution</div>
+          <p class="cmx-col-desc">From first line of code to live product. We ship, every single time.</p>
+          <div class="cmx-col-chips">
+            <span>Design</span><span>Build</span><span>Ship</span>
           </div>
         </div>
 
-      </div>
-
-      <!-- Labs — full width -->
-      <div class="fc-card fc-labs-card sr">
-        <div class="fc-card-head">
-          <span class="fc-card-title">Labs<span class="fc-title-sep">:</span> Where ideas become products</span>
-          <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="fc-visual fc-labs-vis">
-          <p class="fc-labs-eyebrow">Products we built &amp; shipped</p>
-          <div class="fc-lp-grid">
-
-            <!-- CourtRadar -->
-            <div class="fc-lp-card">
-              <div class="fc-lp-icon fc-lp-icon-cr">
-                <svg width="22" height="22" viewBox="0 0 38 38" fill="none" aria-hidden="true">
-                  <path d="M 22 36 A 14 14 0 0 1 36 22" stroke="#f97316" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
-                  <path d="M 14 36 A 22 22 0 0 1 36 14" stroke="#f97316" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
-                  <path d="M 5  36 A 31 31 0 0 1 36 5"  stroke="#f97316" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
-                  <circle cx="23" cy="22" r="4" fill="#bef264"/>
-                </svg>
-              </div>
-              <div class="fc-lp-info">
-                <p class="fc-lp-name">CourtRadar</p>
-                <p class="fc-lp-desc">Padel court finder · Curaçao</p>
-              </div>
-              <span class="fc-lp-live">● Live</span>
-            </div>
-
-            <!-- Altrex -->
-            <div class="fc-lp-card">
-              <div class="fc-lp-icon fc-lp-icon-al">
-                <svg width="22" height="22" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-                  <line x1="6"  y1="10" x2="6"  y2="14" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                  <rect x="4"  y="14" width="4" height="5" fill="#00CFDF" rx="0.5"/>
-                  <line x1="6"  y1="19" x2="6"  y2="23" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="17" y1="7"  x2="17" y2="11" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                  <rect x="14" y="11" width="6" height="13" fill="#00CFDF" rx="0.5"/>
-                  <line x1="17" y1="24" x2="17" y2="29" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="29" y1="3"  x2="29" y2="7"  stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                  <rect x="26" y="7"  width="7" height="21" fill="#00CFDF" rx="0.5"/>
-                  <line x1="29" y1="28" x2="29" y2="33" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="fc-lp-info">
-                <p class="fc-lp-name">Altrex</p>
-                <p class="fc-lp-desc">Crypto signals · BTC, ETH, SOL</p>
-              </div>
-              <span class="fc-lp-live">● Live</span>
-            </div>
-
-            <!-- SupportElevate -->
-            <div class="fc-lp-card">
-              <div class="fc-lp-icon fc-lp-icon-se">
-                <img src="assets/elevate-logo.webp" alt="Elevate Gymnastics" style="width:100%;height:100%;object-fit:contain;padding:1px"/>
-              </div>
-              <div class="fc-lp-info">
-                <p class="fc-lp-name">SupportElevate</p>
-                <p class="fc-lp-desc">Athlete crowdfunding · Goal in 5 days</p>
-              </div>
-              <span class="fc-lp-live">● Live</span>
-            </div>
-
+        <!-- Labs -->
+        <div class="cmx-col cmx-col-labs sr" data-letter="Labs">
+          <span class="cmx-letter" aria-hidden="true">Labs</span>
+          <div class="cmx-col-name">Where ideas become products</div>
+          <p class="cmx-col-desc">We don&rsquo;t just build for clients. We build our own products too. Constantly experimenting, validating, and shipping.</p>
+          <div class="cmx-col-chips">
+            <span>SaaS</span><span>Platforms</span><span>Tools</span>
           </div>
-          <p class="fc-tagline fc-tagline-dark" style="margin-top:14px">Built from zero to launch. End-to-end, every time.</p>
         </div>
+
       </div>
     </div>
   </section>
 
+  <!-- FULL-BLEED CODE PHOTO -->
+  <div class="fullbleed-photo" aria-hidden="true">
+    <img src="assets/code-editor.jpg" alt="Code editor with modern development tools">
+  </div>
+
   <!-- SERVICES -->
-  <section class="section section-cream" id="services" aria-labelledby="services-title">
+  <section class="section" id="services" aria-labelledby="services-title">
     <div class="container">
       <div class="section-header sr">
         <div class="section-label">What we do</div>
-        <h2 class="section-title section-title-dark" id="services-title">
+        <h2 class="section-title" id="services-title">
           Built for your<br>specific business.
         </h2>
         <p class="section-intro">
@@ -236,384 +224,178 @@
         </p>
       </div>
 
-      <div class="svc-fgrid">
+      <div class="bento-grid">
 
-        <!-- Card 1: Product Design (wider) -->
-        <div class="fc-card sr">
-          <div class="fc-card-head">
-            <span class="fc-card-title">Product Design &amp; Development</span>
-            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <!-- 01 — Product Design (wide) -->
+        <div class="bento-card bento-wide bento-purple sr">
+          <div class="bento-num">01</div>
+          <div class="bento-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
           </div>
-          <div class="fc-visual fc-svc1-vis">
-            <div class="fc-browser">
-              <div class="fc-browser-bar">
-                <div class="fc-browser-dots"><span></span><span></span><span></span></div>
-                <div class="fc-browser-url">app.cmxlabs.io</div>
-              </div>
-              <div class="fc-browser-body">
-                <div class="fc-brow-sidebar"></div>
-                <div class="fc-brow-main">
-                  <div class="fc-brow-h"></div>
-                  <div class="fc-brow-cards">
-                    <div class="fc-brow-card"></div>
-                    <div class="fc-brow-card"></div>
-                    <div class="fc-brow-card"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="fc-svc-tags">
-              <span>Web apps</span><span>Mobile</span><span>Platforms</span><span>E-commerce</span>
-            </div>
-          </div>
+          <h3 class="bento-title">Product Design &amp; Development</h3>
+          <p class="bento-desc">From wireframe to shipped product. Web apps, mobile apps, platforms and e-commerce that perform.</p>
+          <div class="bento-chips"><span>Web apps</span><span>Mobile</span><span>Platforms</span><span>E-commerce</span></div>
         </div>
 
-        <!-- Card 2: Automation (narrower) -->
-        <div class="fc-card sr">
-          <div class="fc-card-head">
-            <span class="fc-card-title">Custom Software &amp; Automation</span>
-            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <!-- Stack accent card -->
+        <div class="bento-card bento-accent-card sr">
+          <div class="bento-accent-label">Our stack</div>
+          <div class="bento-stack-chips">
+            <span>React</span><span>Next.js</span><span>TypeScript</span>
+            <span>Supabase</span><span>Stripe</span><span>Vercel</span>
+            <span>Node.js</span><span>Figma</span>
           </div>
-          <div class="fc-visual fc-svc2-vis">
-            <div class="fc-flow">
-              <div class="fc-flow-node fc-fn-trigger">
-                <svg class="fc-fn-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9.5 2L4 9h5l-2.5 5L14 7H9L11.5 2H9.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-                New Event
-              </div>
-              <div class="fc-flow-arrow-v"></div>
-              <div class="fc-flow-node fc-fn-action">
-                <svg class="fc-fn-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2a6 6 0 100 12A6 6 0 008 2zM5 8l2 2 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Validate
-              </div>
-              <div class="fc-flow-arrow-v"></div>
-              <div class="fc-flow-node fc-fn-action">
-                <svg class="fc-fn-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M11.5 4.5l-1.4 1.4M4.5 11.5l-1.4 1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-                Process
-              </div>
-              <div class="fc-flow-arrow-v"></div>
-              <div class="fc-flow-node fc-fn-output">
-                <svg class="fc-fn-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h10M9 5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Deliver
-              </div>
-            </div>
-            <div class="fc-svc-tags">
-              <span>Dashboards</span><span>APIs</span><span>Integrations</span>
-            </div>
-          </div>
+          <div class="bento-accent-footer">Modern. Proven. Fast.</div>
         </div>
 
-        <!-- Card 3: Strategy (full width) -->
-        <div class="fc-card fc-span-full sr">
-          <div class="fc-card-head">
-            <span class="fc-card-title">Strategy, Analytics &amp; Growth</span>
-            <svg class="fc-expand" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <!-- 02 — Custom Software -->
+        <div class="bento-card bento-teal sr">
+          <div class="bento-num">02</div>
+          <div class="bento-icon bento-icon-teal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
           </div>
-          <div class="fc-visual fc-svc3-vis">
-            <div class="fc-chart-area">
-              <!-- Horizontal grid lines -->
-              <div class="fc-chart-grid">
-                <div class="fc-grid-line"></div>
-                <div class="fc-grid-line"></div>
-                <div class="fc-grid-line"></div>
-              </div>
-              <div class="fc-chart-bars">
-                <div class="fc-bar" style="--h:40%"></div>
-                <div class="fc-bar" style="--h:55%"></div>
-                <div class="fc-bar" style="--h:48%"></div>
-                <div class="fc-bar" style="--h:70%"></div>
-                <div class="fc-bar" style="--h:62%"></div>
-                <div class="fc-bar" style="--h:85%"></div>
-                <div class="fc-bar fc-bar-hi" style="--h:95%"></div>
-              </div>
-              <svg class="fc-chart-line" viewBox="0 0 280 90" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                  <linearGradient id="fc-teal-g" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#2DD4BF" stop-opacity="0.30"/>
-                    <stop offset="100%" stop-color="#2DD4BF" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <polygon points="0,72 40,58 80,65 120,41 160,49 200,23 240,10 280,4 280,90 0,90" fill="url(#fc-teal-g)"/>
-                <polyline points="0,72 40,58 80,65 120,41 160,49 200,23 240,10 280,4" fill="none" stroke="#2DD4BF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Data point circles -->
-                <circle cx="0"   cy="72" r="3"   fill="#2DD4BF" opacity="0.5"/>
-                <circle cx="40"  cy="58" r="3"   fill="#2DD4BF" opacity="0.6"/>
-                <circle cx="80"  cy="65" r="3"   fill="#2DD4BF" opacity="0.6"/>
-                <circle cx="120" cy="41" r="3"   fill="#2DD4BF" opacity="0.7"/>
-                <circle cx="160" cy="49" r="3"   fill="#2DD4BF" opacity="0.7"/>
-                <circle cx="200" cy="23" r="3.5" fill="#2DD4BF" opacity="0.85"/>
-                <circle cx="240" cy="10" r="3.5" fill="#2DD4BF" opacity="0.9"/>
-                <circle cx="280" cy="4"  r="5"   fill="#2DD4BF"/>
-                <circle cx="280" cy="4"  r="9"   fill="none" stroke="#2DD4BF" stroke-width="1.5" opacity="0.35"/>
-              </svg>
-            </div>
-            <div class="fc-chart-kpis">
-              <div class="fc-kpi"><strong>+127%</strong><span>Growth</span></div>
-              <div class="fc-kpi"><strong>4.2&times;</strong><span>ROAS</span></div>
-              <div class="fc-kpi"><strong>Top 3</strong><span>SEO Ranked</span></div>
-            </div>
-            <div class="fc-svc-tags">
-              <span>Analytics</span><span>Strategy</span><span>SEO</span><span>Growth</span>
-            </div>
+          <h3 class="bento-title">Custom Software &amp; Automation</h3>
+          <p class="bento-desc">Dashboards, APIs and workflow automations that save time and scale. Integrations that actually work.</p>
+          <div class="bento-chips"><span>Dashboards</span><span>APIs</span><span>Integrations</span></div>
+        </div>
+
+        <!-- 03 — Strategy (wide) -->
+        <div class="bento-card bento-wide bento-orange sr">
+          <div class="bento-num">03</div>
+          <div class="bento-icon bento-icon-orange" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
           </div>
+          <h3 class="bento-title">Strategy, Analytics &amp; Growth</h3>
+          <p class="bento-desc">We track what matters and use it to grow your business. SEO, analytics and growth strategy with real results.</p>
+          <div class="bento-chips"><span>Analytics</span><span>Strategy</span><span>SEO</span><span>Growth</span></div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHY CMX LABS -->
+  <section class="pillars-section" aria-label="Why CMX Labs">
+    <div class="container">
+      <div class="pillars-grid">
+
+        <div class="pillar sr">
+          <div class="pillar-icon pillar-icon-purple" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+          </div>
+          <div class="pillar-title">Design &amp; Dev</div>
+          <p class="pillar-desc">One studio handles everything: design, code, and launch. No handoff gaps, no miscommunication.</p>
+        </div>
+
+        <div class="pillar sr">
+          <div class="pillar-icon pillar-icon-teal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <div class="pillar-title">Full-Stack</div>
+          <p class="pillar-desc">Frontend to backend. We own the entire product, not just one layer of it.</p>
+        </div>
+
+        <div class="pillar sr">
+          <div class="pillar-icon pillar-icon-orange" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+          </div>
+          <div class="pillar-title">Zero to Launch</div>
+          <p class="pillar-desc">Idea to live product, fast. We scope lean, build smart, and ship what matters first.</p>
+        </div>
+
+        <div class="pillar sr">
+          <div class="pillar-icon pillar-icon-lite" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="pillar-title">No Fluff</div>
+          <p class="pillar-desc">Direct, focused, efficient. Straight to execution with no unnecessary overhead or agency bloat.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- OUR PORTFOLIO (dark intro) -->
-  <section class="ps-section ps-dark work-intro-section" id="work">
+  <!-- FULL-BLEED TEAM PHOTO -->
+  <div class="fullbleed-photo" aria-hidden="true">
+    <img src="assets/team-coding.jpg" alt="CMX Labs team at work">
+  </div>
+
+  <!-- PROCESS — how we work -->
+  <section class="section process-section" id="process" aria-labelledby="process-title">
     <div class="container">
-      <div class="work-intro sr">
-        <div class="section-label" style="color:var(--purple-lite)">Our Portfolio</div>
-        <h2 class="work-intro-title">Products we built<br>and launched.</h2>
-        <p class="work-intro-sub">Three live products, built from scratch, shipped to real users.</p>
+
+      <div class="section-header sr">
+        <div class="section-label">How we work</div>
+        <h2 class="section-title" id="process-title">
+          Four steps.<br>One live product.
+        </h2>
+        <p class="section-intro">No fluff, no endless back-and-forth. We move fast and ship the real thing.</p>
       </div>
-    </div>
-  </section>
 
-  <!-- ALTREX (dark) -->
-  <section class="ps-section ps-dark ps-no-top" aria-labelledby="altrex-title">
-    <div class="container">
-      <div class="ps-grid">
+      <div class="process-steps">
 
-        <div class="ps-text sr">
-          <span class="section-label" style="color:var(--purple-lite)">Altrex</span>
-          <h2 class="ps-h2" id="altrex-title">
-            Stop guessing.<br>Start signaling.
-          </h2>
-          <p class="ps-p">
-            AI-powered crypto trading signals for BTC, ETH, SOL and more. Six strategies, Telegram alerts with entry, stop-loss and take-profit, backtest history, and one-tap execution on connected exchanges.
-          </p>
-          <div class="ps-tags">
-            <span>AI signals</span><span>Telegram alerts</span><span>One-tap execution</span>
+        <div class="process-step sr">
+          <div class="process-step-num">01</div>
+          <div class="process-icon process-icon-purple" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           </div>
-          <a href="https://altrex.io" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-            Visit Altrex &rarr;
-          </a>
+          <h3 class="process-step-title">Discover</h3>
+          <p class="process-step-desc">We dig into your idea, your users, and the problem worth solving. No assumptions. Just clarity on what to build and why.</p>
+          <div class="process-step-chips">
+            <span>Research</span><span>Scoping</span><span>Strategy</span>
+          </div>
         </div>
 
-        <div class="ps-devices sr">
-          <div class="cr-portfolio-phone">
-            <div class="cr-phone-frame">
-              <div class="cr-phone-notch" aria-hidden="true"></div>
-              <div class="cr-phone-screen">
-                <div class="al-app">
+        <div class="process-step sr">
+          <div class="process-step-num">02</div>
+          <div class="process-icon process-icon-teal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h3 class="process-step-title">Design</h3>
+          <p class="process-step-desc">Wireframes to high-fidelity UI. We design for real users: clean, functional, and aligned with your brand from day one.</p>
+          <div class="process-step-chips">
+            <span>Wireframes</span><span>UI&nbsp;/&nbsp;UX</span><span>Prototypes</span>
+          </div>
+        </div>
 
-                  <!-- Nav -->
-                  <div class="al-nav">
-                    <div class="al-nav-logo">
-                      <svg width="18" height="18" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-                        <line x1="6"  y1="10" x2="6"  y2="14" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                        <rect x="4"   y="14" width="4" height="5"  fill="#00CFDF" rx="0.5"/>
-                        <line x1="6"  y1="19" x2="6"  y2="23" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                        <line x1="17" y1="7"  x2="17" y2="11" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                        <rect x="14"  y="11" width="6" height="13" fill="#00CFDF" rx="0.5"/>
-                        <line x1="17" y1="24" x2="17" y2="29" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                        <line x1="29" y1="3"  x2="29" y2="7"  stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                        <rect x="26"  y="7"  width="7" height="21" fill="#00CFDF" rx="0.5"/>
-                        <line x1="29" y1="28" x2="29" y2="33" stroke="#00CFDF" stroke-width="1.5" stroke-linecap="round"/>
-                      </svg>
-                      <span>Altrex.io</span>
-                    </div>
-                    <span class="al-nav-btn">Get started</span>
-                  </div>
+        <div class="process-step sr">
+          <div class="process-step-num">03</div>
+          <div class="process-icon process-icon-orange" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <h3 class="process-step-title">Build</h3>
+          <p class="process-step-desc">Modern stack, clean code, no shortcuts. We build fast, test as we go, and keep you in the loop at every milestone.</p>
+          <div class="process-step-chips">
+            <span>Development</span><span>Testing</span><span>Iteration</span>
+          </div>
+        </div>
 
-                  <!-- Body -->
-                  <div class="al-body">
-                    <div class="al-pill">BTC &middot; ETH &middot; SOL &middot; More coming</div>
-                    <h2 class="al-h1">Get crypto trade alerts on Telegram.</h2>
-                    <p class="al-accent">You <span class="al-teal">choose how to act.</span></p>
-                    <p class="al-desc">Our bot scans the market 24/7. When it spots an opportunity you get a Telegram alert with entry price, stop loss, and take profit already calculated.</p>
-                    <div class="al-btn-primary">Start free trial</div>
-                    <div class="al-btn-outline">How it works</div>
-                    <p class="al-fine">7-day free trial &middot; No credit card required &middot; Cancel anytime</p>
-                    <!-- Telegram bot card -->
-                    <div class="al-tg-card">
-                      <div class="al-tg-head">
-                        <div class="al-tg-av"></div>
-                        <div class="al-tg-info">
-                          <span class="al-tg-name">Altrex.io</span>
-                          <span class="al-tg-sub">bot</span>
-                        </div>
-                      </div>
-                      <div class="al-tg-body">
-                        <div class="al-tg-check">&#10003;</div>
-                        <span class="al-tg-label">Order placed!</span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
+        <div class="process-step sr">
+          <div class="process-step-num">04</div>
+          <div class="process-icon process-icon-launch" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          </div>
+          <h3 class="process-step-title">Launch</h3>
+          <p class="process-step-desc">We deploy, monitor, and hand over a product that works. Launch is not the end. It&rsquo;s where the real work starts.</p>
+          <div class="process-step-chips">
+            <span>Deploy</span><span>Monitor</span><span>Support</span>
           </div>
         </div>
 
       </div>
-    </div>
-  </section>
 
-  <!-- SUPPORT ELEVATE (cream) -->
-  <section class="ps-section ps-cream" aria-labelledby="eevate-title">
-    <div class="container">
-      <div class="ps-grid ps-flip">
-
-        <div class="ps-devices sr">
-          <div class="cr-portfolio-phone">
-            <div class="cr-phone-frame">
-              <div class="cr-phone-notch" aria-hidden="true"></div>
-              <div class="cr-phone-screen">
-                <div class="se-app">
-
-                  <!-- Hero zone -->
-                  <div class="se-hero">
-                    <div class="se-pill">&#11044; Copa de Las Am&eacute;ricas, Lima Peru 2026</div>
-                    <h2 class="se-h1">Support Elevate<br><span class="se-teal">Gymnastics<br>Cura&ccedil;ao</span></h2>
-                    <p class="se-desc">Help our 14 athletes compete at the Copa de Las Am&eacute;ricas. Every contribution brings them closer to Lima.</p>
-                    <div class="se-scroll-hint">scroll &#x2193;</div>
-                  </div>
-
-                  <!-- Campaign progress zone -->
-                  <div class="se-progress">
-                    <div class="se-prog-label">CAMPAIGN PROGRESS &nbsp;&middot;&nbsp; 14 athletes</div>
-                    <div class="se-prog-track">
-                      <div class="se-prog-fill" style="width:53%"></div>
-                      <div class="se-prog-fill2" style="width:19%"></div>
-                    </div>
-                    <div class="se-prog-meta">
-                      <span class="se-teal-t">XCG 30,673 raised</span>
-                      <span class="se-grey">XCG 58,408 goal</span>
-                    </div>
-                    <div class="se-targets">
-                      <div class="se-targets-label">FUNDRAISING TARGETS</div>
-                      <div class="se-target">
-                        <div class="se-t-left"><span class="se-t-by">RAISE BY</span><span class="se-t-date">May 31</span></div>
-                        <div class="se-t-bar-wrap"><div class="se-t-bar se-t-full"></div></div>
-                        <span class="se-t-reached">&#10003; reached</span>
-                      </div>
-                      <div class="se-target">
-                        <div class="se-t-left"><span class="se-t-by">RAISE BY</span><span class="se-t-date">Jun 16</span></div>
-                        <div class="se-t-bar-wrap"><div class="se-t-bar" style="width:58%"></div></div>
-                        <span class="se-t-pct">58%</span>
-                      </div>
-                      <div class="se-target">
-                        <div class="se-t-left"><span class="se-t-by">RAISE BY</span><span class="se-t-date">Jun 30</span></div>
-                        <div class="se-t-bar-wrap"><div class="se-t-bar" style="width:3%"></div></div>
-                        <span class="se-t-zero">0%</span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ps-text sr">
-          <span class="section-label">SupportElevate</span>
-          <h2 class="ps-h2 ps-h2-dark" id="eevate-title">
-            Fund athletes.<br>Change lives.
-          </h2>
-          <p class="ps-p ps-p-dark">
-            A sports crowdfunding platform built for Caribbean athletes. We built it for Xiara, a gymnast from Cura&ccedil;ao competing at Copa de Las Am&eacute;ricas 2026. She hit her full goal in 5 days.
-          </p>
-          <div class="ps-tags ps-tags-dark">
-            <span>Sports crowdfunding</span><span>Goal reached</span><span>Copa de Las Am&eacute;ricas</span>
-          </div>
-          <a href="https://supportelevate.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-            Visit SupportElevate &rarr;
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- COURT-RADAR (dark) -->
-  <section class="ps-section ps-dark" aria-labelledby="court-title">
-    <div class="container">
-      <div class="ps-grid">
-
-        <div class="ps-text sr">
-          <span class="section-label" style="color:var(--orange)">Court-Radar</span>
-          <h2 class="ps-h2" id="court-title">
-            Find. Book.<br>Play padel.
-          </h2>
-          <p class="ps-p">
-            Real-time court availability across 6 padel clubs in Cura&ccedil;ao. Players find open slots and book in seconds. No phone calls, no guessing.
-          </p>
-          <div class="ps-tags">
-            <span>Court booking</span><span>Live availability</span><span>6 clubs · 25+ courts</span>
-          </div>
-          <a href="https://court-radar.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-            Visit Court-Radar &rarr;
-          </a>
-        </div>
-
-        <div class="ps-devices sr">
-          <div class="cr-portfolio-phone">
-            <div class="cr-phone-frame">
-              <div class="cr-phone-notch" aria-hidden="true"></div>
-              <div class="cr-phone-screen">
-                <div class="cr-app">
-                  <div class="cr-hero-zone">
-                    <div class="cr-court-bg" aria-hidden="true"></div>
-                    <div class="cr-app-nav" aria-hidden="true">
-                      <div class="cr-brand">
-                        <div class="cr-radar-wrap">
-                          <div class="cr-radar-glow" aria-hidden="true"></div>
-                          <svg class="cr-radar-svg" width="28" height="28" viewBox="0 0 38 38" fill="none" aria-hidden="true">
-                            <path d="M 22 36 A 14 14 0 0 1 36 22" stroke="#f97316" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
-                            <path d="M 14 36 A 22 22 0 0 1 36 14" stroke="#f97316" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
-                            <path d="M 5  36 A 31 31 0 0 1 36 5"  stroke="#f97316" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
-                            <line x1="36" y1="36" x2="12" y2="12" stroke="#f97316" stroke-width="1.2" opacity="0.4"/>
-                            <circle cx="23" cy="22" r="6.5" fill="#f97316" opacity="0.15"/>
-                            <circle cx="23" cy="22" r="4"   fill="none" stroke="#f97316" stroke-width="1.8" opacity="0.6"/>
-                            <circle cx="23" cy="22" r="3" fill="#bef264"/>
-                            <path d="M 21.2 20.4 Q 23 21.9 24.8 20.4" fill="none" stroke="white" stroke-width="0.6" stroke-linecap="round" opacity="0.9"/>
-                            <path d="M 21.2 23.6 Q 23 22.1 24.8 23.6" fill="none" stroke="white" stroke-width="0.6" stroke-linecap="round" opacity="0.9"/>
-                          </svg>
-                        </div>
-                        <span><span style="color:#fff">Court</span><span style="color:#f97316">Radar</span></span>
-                      </div>
-                    </div>
-                    <div class="cr-app-body">
-                      <h3 class="cr-app-h">Find &amp; book<br>padel courts</h3>
-                      <p class="cr-app-p">All clubs in Cura&ccedil;ao, <em>one place.</em></p>
-                      <div class="cr-app-btn cr-btn-primary">Find a court &rarr;</div>
-                      <div class="cr-app-btn cr-btn-secondary">Find players &rarr;</div>
-                      <div class="cr-account-link">Create a free account</div>
-                    </div>
-                  </div>
-                  <div class="cr-stats-zone">
-                    <div class="cr-stats">
-                      <div class="cr-stat"><strong>6</strong><span>Clubs</span></div>
-                      <div class="cr-stat-sep" aria-hidden="true"></div>
-                      <div class="cr-stat"><strong>25+</strong><span>Courts</span></div>
-                      <div class="cr-stat-sep" aria-hidden="true"></div>
-                      <div class="cr-stat"><strong class="cr-stat-live">Live</strong><span>Availability</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="section section-cream contact-section" id="contact" aria-labelledby="contact-title">
+  <section class="section contact-section" id="contact" aria-labelledby="contact-title">
     <div class="container">
       <div class="contact-grid">
 
         <div class="contact-left sr">
           <div class="section-label">Get in touch</div>
-          <h2 class="section-title section-title-dark" id="contact-title">
+          <h2 class="section-title" id="contact-title">
             Let&rsquo;s build<br>something real.
           </h2>
           <p class="contact-desc">
@@ -685,25 +467,19 @@
           <rect x="114" y="64" width="222" height="2.5" rx="1.5" fill="#7F77DD"/>
           <text x="114" y="82" font-family="Inter, Arial, sans-serif" font-size="11.5" font-weight="500" letter-spacing="2.2" fill="#c8c3f0" opacity="0.90">Where ideas meet execution.</text>
         </svg>
-        <p class="footer-desc">A digital product studio based in Cura&ccedil;ao.<br>We design, build, and launch digital products that make an impact.</p>
+        <p class="footer-desc">A digital product studio from Willemstad, Cura&ccedil;ao.<br>We build products that go live and get used.</p>
       </div>
       <div class="footer-nav" role="navigation" aria-label="Footer navigation">
         <div class="footer-col sr">
           <span class="fc-title">Company</span>
           <a href="#services">Services</a>
-          <a href="#work">Work</a>
+          <a href="#process">Process</a>
           <a href="#contact">Contact</a>
-        </div>
-        <div class="footer-col sr">
-          <span class="fc-title">Products</span>
-          <a href="https://altrex.io" target="_blank" rel="noopener">Altrex</a>
-          <a href="https://supportelevate.vercel.app" target="_blank" rel="noopener">Elevate</a>
-          <a href="https://court-radar.vercel.app" target="_blank" rel="noopener">CourtRadar</a>
         </div>
         <div class="footer-col sr">
           <span class="fc-title">Connect</span>
           <a href="mailto:info@cmxlabs.io">info@cmxlabs.io</a>
-          <a href="tel:+59996754955" style="white-space:nowrap">+599 9 675 4955</a>
+          <a href="tel:+59996754955">+599 9 675 4955</a>
         </div>
       </div>
       <div class="footer-bottom sr">
