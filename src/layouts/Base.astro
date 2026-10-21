@@ -46,13 +46,24 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://www.cmxl
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
 
-  <!-- Fonts -->
+  <!-- Critical: prevent white flash before CSS loads -->
+  <style>html,body{background:#07070C;color:#fff}</style>
+
+  <!-- Fonts — loaded async to avoid render-blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
+    rel="preload"
+    as="style"
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
+    onload="this.onload=null;this.rel='stylesheet'"
   />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </noscript>
 
   <!-- Structured data — Organization -->
   <script type="application/ld+json">
