@@ -346,6 +346,7 @@ button { font-family: inherit; }
   padding: 6px 16px; border-radius: 50px;
   margin-bottom: 36px;
   backdrop-filter: blur(8px);
+  white-space: nowrap;
 }
 .eyebrow-dot {
   width: 6px; height: 6px; border-radius: 50%;
@@ -514,18 +515,6 @@ button { font-family: inherit; }
 }
 .view-all-link:hover { color: var(--purple-lite); gap: 10px; }
 
-/* Project count badge */
-.fw-count-badge {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-width: 36px; height: 36px; padding: 0 10px;
-  background: rgba(124,110,250,0.12); border: 1px solid rgba(124,110,250,0.25);
-  border-radius: 100px;
-  font-size: .95rem; font-weight: 700; color: var(--purple-lite);
-  letter-spacing: -.01em;
-  vertical-align: middle;
-  margin-left: 12px;
-  position: relative; top: -4px;
-}
 
 /* Featured project — large card */
 .fw-featured {
@@ -657,24 +646,28 @@ button { font-family: inherit; }
 /* ─── PROJECT FILMSTRIP ──────────────────────────────────── */
 .fw-filmstrip-wrap {
   overflow: hidden;
-  margin-top: 12px;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 80px, #000 calc(100% - 80px), transparent);
-  mask-image: linear-gradient(to right, transparent, #000 80px, #000 calc(100% - 80px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 100px, #000 calc(100% - 100px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 100px, #000 calc(100% - 100px), transparent);
 }
 .fw-filmstrip {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   width: max-content;
-  animation: fw-scroll 28s linear infinite;
 }
+.fw-filmstrip-left  { animation: fw-scroll-left  30s linear infinite; }
+.fw-filmstrip-right { animation: fw-scroll-right 24s linear infinite; }
 .fw-filmstrip:hover { animation-play-state: paused; }
-@keyframes fw-scroll {
+@keyframes fw-scroll-left {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+@keyframes fw-scroll-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
 .fw-film-card {
   display: flex; flex-direction: column;
-  width: 300px; flex-shrink: 0;
+  width: 340px; flex-shrink: 0;
   border: 1px solid var(--bd); border-radius: var(--r-xl);
   overflow: hidden; background: var(--bg-1);
   text-decoration: none; color: inherit;
@@ -682,7 +675,7 @@ button { font-family: inherit; }
 }
 .fw-film-card:hover { border-color: var(--bd-2); transform: translateY(-4px); }
 .fw-film-img {
-  aspect-ratio: 16/9; overflow: hidden;
+  aspect-ratio: 4/3; overflow: hidden;
   background: rgba(124,110,250,0.06);
 }
 .fw-film-img img {

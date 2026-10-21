@@ -3,10 +3,13 @@ import Base from '../layouts/Base.astro';
 import { getPublishedProjects } from '../data/projects.js';
 
 const allProjects = getPublishedProjects();
-const featured    = allProjects.find(p => p.featured);
-const otherWork   = allProjects.filter(p => !p.featured);
-// Duplicate for seamless infinite scroll (need at least ~2× viewport width of cards)
-const filmstrip   = [...otherWork, ...otherWork, ...otherWork, ...otherWork];
+const count       = allProjects.length;
+// Row 1: all projects, scroll left — duplicate for seamless loop
+const row1 = [...allProjects, ...allProjects];
+// Row 2: offset by half so different cards are prominent, scroll right
+const half = Math.ceil(allProjects.length / 2);
+const shifted = [...allProjects.slice(half), ...allProjects.slice(0, half)];
+const row2 = [...shifted, ...shifted];
 ---
 
 <Base
@@ -33,8 +36,8 @@ const filmstrip   = [...otherWork, ...otherWork, ...otherWork, ...otherWork];
       </h1>
 
       <p class="hero-sub">
-        We design, build, and launch digital products.<br />
-        From first wireframe to real users.
+        We build websites, apps, and digital tools for your business.<br />
+        From your first idea to a live product with real users.
       </p>
 
       <div class="hero-ctas">
@@ -58,24 +61,24 @@ const filmstrip   = [...otherWork, ...otherWork, ...otherWork, ...otherWork];
           </div>
           <div class="hm-project">
             <span class="hm-status hm-live"></span>
-            <span class="hm-pname">Web Platforms</span>
-            <span class="hm-tag">Full-stack</span>
+            <span class="hm-pname">Business Website</span>
+            <span class="hm-tag">Live in weeks</span>
           </div>
           <div class="hm-project">
             <span class="hm-status hm-live"></span>
-            <span class="hm-pname">SaaS Products</span>
-            <span class="hm-tag">Full-stack</span>
+            <span class="hm-pname">Mobile App</span>
+            <span class="hm-tag">iOS &amp; Android</span>
           </div>
           <div class="hm-project">
             <span class="hm-status hm-live"></span>
-            <span class="hm-pname">Mobile Apps</span>
-            <span class="hm-tag">Full-stack</span>
+            <span class="hm-pname">Booking System</span>
+            <span class="hm-tag">Custom built</span>
           </div>
           <div class="hm-divider"></div>
           <div class="hm-stats">
             <div class="hm-stat"><span class="hm-stat-n">Design</span><span class="hm-stat-l">+ Dev</span></div>
-            <div class="hm-stat"><span class="hm-stat-n">Zero</span><span class="hm-stat-l">to launch</span></div>
-            <div class="hm-stat"><span class="hm-stat-n">Fast</span><span class="hm-stat-l">delivery</span></div>
+            <div class="hm-stat"><span class="hm-stat-n">Idea</span><span class="hm-stat-l">to launch</span></div>
+            <div class="hm-stat"><span class="hm-stat-n">Any</span><span class="hm-stat-l">industry</span></div>
           </div>
         </div>
       </div>
@@ -83,31 +86,29 @@ const filmstrip   = [...otherWork, ...otherWork, ...otherWork, ...otherWork];
     </div>
   </section>
 
-  <!-- TECH STACK MARQUEE -->
-  <div class="marquee-strip" aria-hidden="true">
+  <!-- WHAT WE BUILD MARQUEE -->
+  <div class="marquee-strip" aria-label="What we build">
     <div class="marquee-track">
-      <span>React</span><span class="mq-sep">·</span>
-      <span>Next.js</span><span class="mq-sep">·</span>
-      <span>TypeScript</span><span class="mq-sep">·</span>
-      <span>Supabase</span><span class="mq-sep">·</span>
-      <span>Stripe</span><span class="mq-sep">·</span>
-      <span>Vercel</span><span class="mq-sep">·</span>
-      <span>Node.js</span><span class="mq-sep">·</span>
-      <span>Figma</span><span class="mq-sep">·</span>
-      <span>PostgreSQL</span><span class="mq-sep">·</span>
-      <span>Tailwind&nbsp;CSS</span><span class="mq-sep">·</span>
-      <span>React Native</span><span class="mq-sep">·</span>
-      <span>React</span><span class="mq-sep">·</span>
-      <span>Next.js</span><span class="mq-sep">·</span>
-      <span>TypeScript</span><span class="mq-sep">·</span>
-      <span>Supabase</span><span class="mq-sep">·</span>
-      <span>Stripe</span><span class="mq-sep">·</span>
-      <span>Vercel</span><span class="mq-sep">·</span>
-      <span>Node.js</span><span class="mq-sep">·</span>
-      <span>Figma</span><span class="mq-sep">·</span>
-      <span>PostgreSQL</span><span class="mq-sep">·</span>
-      <span>Tailwind&nbsp;CSS</span><span class="mq-sep">·</span>
-      <span>React Native</span><span class="mq-sep">·</span>
+      <span>Business Websites</span><span class="mq-sep">·</span>
+      <span>Mobile Apps</span><span class="mq-sep">·</span>
+      <span>E-commerce Stores</span><span class="mq-sep">·</span>
+      <span>Booking Systems</span><span class="mq-sep">·</span>
+      <span>Customer Portals</span><span class="mq-sep">·</span>
+      <span>Workflow Automation</span><span class="mq-sep">·</span>
+      <span>SaaS Platforms</span><span class="mq-sep">·</span>
+      <span>Web Dashboards</span><span class="mq-sep">·</span>
+      <span>API Integrations</span><span class="mq-sep">·</span>
+      <span>UI&nbsp;/&nbsp;UX Design</span><span class="mq-sep">·</span>
+      <span>Business Websites</span><span class="mq-sep">·</span>
+      <span>Mobile Apps</span><span class="mq-sep">·</span>
+      <span>E-commerce Stores</span><span class="mq-sep">·</span>
+      <span>Booking Systems</span><span class="mq-sep">·</span>
+      <span>Customer Portals</span><span class="mq-sep">·</span>
+      <span>Workflow Automation</span><span class="mq-sep">·</span>
+      <span>SaaS Platforms</span><span class="mq-sep">·</span>
+      <span>Web Dashboards</span><span class="mq-sep">·</span>
+      <span>API Integrations</span><span class="mq-sep">·</span>
+      <span>UI&nbsp;/&nbsp;UX Design</span><span class="mq-sep">·</span>
     </div>
   </div>
 
@@ -118,67 +119,53 @@ const filmstrip   = [...otherWork, ...otherWork, ...otherWork, ...otherWork];
 
         <div class="featured-work-header sr">
           <div>
-            <div class="section-label">Selected Work</div>
-            <h2 class="section-title" id="fw-title">
-              Products we&rsquo;ve built.
-              <span class="fw-count-badge" aria-label={`${allProjects.length} projects`}>{allProjects.length}</span>
-            </h2>
+            <div class="section-label">Selected Work &nbsp;&middot;&nbsp; {count} project{count !== 1 ? 's' : ''}</div>
+            <h2 class="section-title" id="fw-title">Products we&rsquo;ve built.</h2>
           </div>
           <a href="/work" class="view-all-link">
-            Explore all projects &rarr;
+            Explore all &rarr;
           </a>
         </div>
 
-        {/* Featured project — large card */}
-        {featured && (
-          <a href={`/work/${featured.slug}`} class="fw-featured sr" aria-label={`View ${featured.name} case study`}>
-            <div class="fw-featured-img">
-              {featured.thumbnail
-                ? <img src={featured.thumbnail} alt={`${featured.name} screenshot`} loading="lazy" />
-                : <div class="fw-featured-placeholder">Screenshot coming soon</div>
-              }
-            </div>
-            <div class="fw-featured-content">
-              <div class="fw-category-badge">
-                <span class="fw-cat-dot"></span>
-                {featured.category}
-              </div>
-              <h3 class="fw-title">{featured.name}</h3>
-              <p class="fw-desc">{featured.shortDesc}</p>
-              <div class="fw-tags">
-                {featured.tags.map(t => <span class="fw-tag">{t}</span>)}
-              </div>
-              <span class="fw-cta">View case study &rarr;</span>
-            </div>
-          </a>
-        )}
-
-        {/* Project filmstrip — scales from 4 to 50+ projects automatically */}
-        {otherWork.length > 0 && (
-          <div class="fw-filmstrip-wrap" aria-label="More projects">
-            <div class="fw-filmstrip">
-              {filmstrip.map((p, i) => (
-                <a
-                  href={`/work/${p.slug}`}
-                  class="fw-film-card"
-                  aria-label={`View ${p.name}`}
-                  tabindex={i >= otherWork.length ? -1 : 0}
-                >
-                  <div class="fw-film-img">
-                    {p.thumbnail
-                      ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="lazy" />
-                      : <div class="fw-film-placeholder">{p.category}</div>
-                    }
-                  </div>
-                  <div class="fw-film-body">
-                    <span class="fw-film-name">{p.name}</span>
-                    <span class="fw-film-cat">{p.category}</span>
-                  </div>
-                </a>
-              ))}
-            </div>
+        {/* Row 1 — scrolls left */}
+        <div class="fw-filmstrip-wrap sr">
+          <div class="fw-filmstrip fw-filmstrip-left">
+            {row1.map((p, i) => (
+              <a href={`/work/${p.slug}`} class="fw-film-card" aria-label={`View ${p.name}`} tabindex={i >= count ? -1 : 0}>
+                <div class="fw-film-img">
+                  {p.thumbnail
+                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="lazy" />
+                    : <div class="fw-film-placeholder">{p.category}</div>
+                  }
+                </div>
+                <div class="fw-film-body">
+                  <span class="fw-film-name">{p.name}</span>
+                  <span class="fw-film-cat">{p.category}</span>
+                </div>
+              </a>
+            ))}
           </div>
-        )}
+        </div>
+
+        {/* Row 2 — scrolls right, offset so different cards are prominent */}
+        <div class="fw-filmstrip-wrap" style="margin-top:12px;">
+          <div class="fw-filmstrip fw-filmstrip-right">
+            {row2.map((p, i) => (
+              <a href={`/work/${p.slug}`} class="fw-film-card" aria-label={`View ${p.name}`} tabindex={i >= count ? -1 : 0}>
+                <div class="fw-film-img">
+                  {p.thumbnail
+                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="lazy" />
+                    : <div class="fw-film-placeholder">{p.category}</div>
+                  }
+                </div>
+                <div class="fw-film-body">
+                  <span class="fw-film-name">{p.name}</span>
+                  <span class="fw-film-cat">{p.category}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
 
       </div>
     </section>
@@ -205,9 +192,9 @@ const filmstrip   = [...otherWork, ...otherWork, ...otherWork, ...otherWork];
         <div class="cmx-col sr" data-letter="M">
           <span class="cmx-letter" aria-hidden="true">M</span>
           <div class="cmx-col-name">Modern</div>
-          <p class="cmx-col-desc">Modern stack, clean code, no shortcuts. Built for now and what comes next.</p>
+          <p class="cmx-col-desc">Modern tools, clean code, no shortcuts. Built for now and what comes next: fast, secure, and easy to grow.</p>
           <div class="cmx-col-chips">
-            <span>React</span><span>Next.js</span><span>TypeScript</span>
+            <span>Scalable</span><span>Secure</span><span>Future-proof</span>
           </div>
         </div>
 
@@ -264,13 +251,16 @@ const filmstrip   = [...otherWork, ...otherWork, ...otherWork, ...otherWork];
         </div>
 
         <div class="bento-card bento-accent-card sr">
-          <div class="bento-accent-label">Our stack</div>
+          <div class="bento-accent-label">How we build it</div>
+          <p style="font-size:.82rem; color:var(--t2); margin-bottom:14px; line-height:1.5;">
+            We use modern, proven tools so your product is fast, secure, and easy to grow as your business scales.
+          </p>
           <div class="bento-stack-chips">
             <span>React</span><span>Next.js</span><span>TypeScript</span>
             <span>Supabase</span><span>Stripe</span><span>Vercel</span>
             <span>Node.js</span><span>Figma</span>
           </div>
-          <div class="bento-accent-footer">Modern. Proven. Fast.</div>
+          <div class="bento-accent-footer">Reliable. Scalable. Future-proof.</div>
         </div>
 
         <div class="bento-card bento-teal sr">
@@ -279,8 +269,8 @@ const filmstrip   = [...otherWork, ...otherWork, ...otherWork, ...otherWork];
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
           </div>
           <h3 class="bento-title">Custom Software &amp; Automation</h3>
-          <p class="bento-desc">Dashboards, APIs and workflow automations that save time and scale. Integrations that actually work.</p>
-          <div class="bento-chips"><span>Dashboards</span><span>APIs</span><span>Integrations</span></div>
+          <p class="bento-desc">Replace manual work with tools built for your business. Automate repetitive tasks, connect your systems, and get dashboards that show what actually matters.</p>
+          <div class="bento-chips"><span>Dashboards</span><span>Automations</span><span>Integrations</span></div>
         </div>
 
         <div class="bento-card bento-wide bento-orange sr">
@@ -325,16 +315,16 @@ const filmstrip   = [...otherWork, ...otherWork, ...otherWork, ...otherWork];
           <div class="pillar-icon pillar-icon-teal" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
           </div>
-          <div class="pillar-title">Full-Stack</div>
-          <p class="pillar-desc">Frontend to backend. We own the entire product, not just one layer of it.</p>
+          <div class="pillar-title">Everything in-house</div>
+          <p class="pillar-desc">We handle the entire product: design, development, and launch. All under one roof. No outsourcing, no gaps.</p>
         </div>
 
         <div class="pillar sr">
           <div class="pillar-icon pillar-icon-orange" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
           </div>
-          <div class="pillar-title">Zero to Launch</div>
-          <p class="pillar-desc">Idea to live product, fast. We scope lean, build smart, and ship what matters first.</p>
+          <div class="pillar-title">Idea to live product</div>
+          <p class="pillar-desc">We take you from first conversation to a launched product, fast. No endless back-and-forth. Just focused execution.</p>
         </div>
 
         <div class="pillar sr">

@@ -39,8 +39,8 @@ export const projects = [
     thumbnail: '/assets/screenshot-courtradar.png',
     desktopScreenshots: ['/assets/screenshot-courtradar.png'],
     mobileScreenshots: [],
-    description: `Court-Radar is a sports court booking and management platform built for sports facility owners and players. The platform handles everything from real-time court availability and online reservations to integrated payments and business reporting — giving facility operators a complete management solution and players a seamless booking experience.`,
-    challenge: `Sports facility owners in the region were managing bookings manually — through phone calls, WhatsApp messages, and spreadsheets. This caused double-bookings, missed reservations, and no visibility into revenue. Players had no reliable way to know if a court was available, let alone book it online.`,
+    description: `Court-Radar is a sports court booking and management platform built for sports facility owners and players. The platform handles everything from real-time court availability and online reservations to integrated payments and business reporting, giving facility operators a complete management solution and players a seamless booking experience.`,
+    challenge: `Sports facility owners in the region were managing bookings manually: through phone calls, WhatsApp messages, and spreadsheets. This caused double-bookings, missed reservations, and no visibility into revenue. Players had no reliable way to know if a court was available, let alone book it online.`,
     solution: `We designed and built a full-stack SaaS platform that gives facility owners a real-time management dashboard and players a clean, fast booking experience. Stripe handles payments, Supabase powers the real-time database, and the platform is designed to scale across multiple facilities.`,
     features: [
       'Real-time court availability and booking calendar',
@@ -87,7 +87,7 @@ export const projects = [
       '/assets/hilltop-living.jpg',
       '/assets/hilltop-booking.jpg',
     ],
-    description: `Hilltop Villa Curaçao is a premium vacation rental property that needed a digital presence matching the quality and experience of the property itself. We built a modern, conversion-focused website that showcases the villa beautifully and drives direct bookings — reducing dependence on third-party platforms.`,
+    description: `Hilltop Villa Curaçao is a premium vacation rental property that needed a digital presence matching the quality and experience of the property itself. We built a modern, conversion-focused website that showcases the villa beautifully and drives direct bookings, reducing dependence on third-party platforms.`,
     challenge: `The property was relying entirely on platforms like Airbnb and Booking.com, giving them limited control over their brand, pricing, and guest relationships. They needed a professional direct-booking website that reflected the premium nature of the property.`,
     solution: `We created an immersive, visually-led website with full-screen imagery, a clear showcase of amenities and experiences, and a streamlined direct booking flow. The design communicates the premium hospitality experience from the first scroll.`,
     features: [
@@ -130,7 +130,7 @@ export const projects = [
     thumbnail: '/assets/hairbyjessica-desktop.jpg',
     desktopScreenshots: ['/assets/hairbyjessica-desktop.jpg'],
     mobileScreenshots: ['/assets/hairbyjessica-mobile.jpg'],
-    description: `Hair by Jessica needed a digital presence that reflected the craft, care, and premium nature of their salon experience. We designed a website with a strong editorial aesthetic — sophisticated typography, an elegant color palette, and a layout that lets the work speak for itself.`,
+    description: `Hair by Jessica needed a digital presence that reflected the craft, care, and premium nature of their salon experience. We designed a website with a strong editorial aesthetic: sophisticated typography, an elegant color palette, and a layout that lets the work speak for itself.`,
     challenge: `The salon had no website and relied entirely on social media and word-of-mouth for new clients. They needed a professional online presence that communicated quality, showcased their work, and made it easy for potential clients to book an appointment.`,
     solution: `We designed an editorial-inspired website with strong visual hierarchy, a curated portfolio section, and clear service and booking information. The design aesthetic was crafted specifically to attract the right clientele and reflect the salon's premium positioning.`,
     features: [
@@ -174,8 +174,8 @@ export const projects = [
     desktopScreenshots: ['/assets/xiara-desktop.jpg'],
     mobileScreenshots: ['/assets/xiara-mobile.jpg'],
     description: `Xiara Journey is a fundraising campaign platform built to raise awareness for Xiara's cause and make it easy for supporters to contribute. The platform needed to communicate urgency and emotional impact while maintaining transparency and trust with donors.`,
-    challenge: `The campaign needed a digital platform quickly — one that could tell a compelling human story, present the cause clearly, and give donors confidence that their contribution would matter. Generic fundraising pages on third-party platforms didn't give enough control over the narrative or design.`,
-    solution: `We built a focused campaign website with a clear narrative arc — from introducing Xiara's story to explaining the impact of donations and making the giving process simple. The design balances emotional storytelling with clear, trustworthy information presentation.`,
+    challenge: `The campaign needed a digital platform quickly: one that could tell a compelling human story, present the cause clearly, and give donors confidence that their contribution would matter. Generic fundraising pages on third-party platforms didn't give enough control over the narrative or design.`,
+    solution: `We built a focused campaign website with a clear narrative arc, from introducing Xiara's story to explaining the impact of donations and making the giving process simple. The design balances emotional storytelling with clear, trustworthy information presentation.`,
     features: [
       'Campaign story and narrative design',
       'Donation information and guidance',
