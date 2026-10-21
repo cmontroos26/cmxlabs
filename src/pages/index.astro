@@ -1,0 +1,490 @@
+---
+import Base from '../layouts/Base.astro';
+import { getPublishedProjects } from '../data/projects.js';
+
+const allProjects = getPublishedProjects();
+const featured    = allProjects.find(p => p.featured);
+const otherWork   = allProjects.filter(p => !p.featured).slice(0, 3);
+---
+
+<Base
+  title="CMX Labs | Digital Product Studio — Curaçao"
+  description="CMX Labs is a digital product studio based in Curaçao. We design, build, and launch digital products — from first wireframe to real users."
+  showCanvas={true}
+>
+
+  <!-- HERO -->
+  <section class="hero" id="home" aria-label="Hero">
+    <div class="hero-noise"    aria-hidden="true"></div>
+    <div class="hero-vignette" aria-hidden="true"></div>
+
+    <div class="container hero-center">
+
+      <div class="hero-eyebrow" aria-hidden="true">
+        <span class="eyebrow-dot"></span>
+        Digital Product Studio &nbsp;&middot;&nbsp; Cura&ccedil;ao
+      </div>
+
+      <h1 class="hero-h1">
+        <span class="rl"><span>From idea to</span></span>
+        <span class="rl"><span><em class="hero-accent">live product.</em></span></span>
+      </h1>
+
+      <p class="hero-sub">
+        We design, build, and launch digital products.<br />
+        From first wireframe to real users.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="/contact" class="btn btn-primary btn-xl btn-magnetic">Start a project &rarr;</a>
+        <a href="/work"    class="btn btn-ghost  btn-xl">Explore our work</a>
+      </div>
+
+      <div class="hero-mockup" aria-hidden="true">
+        <div class="hm-chrome">
+          <div class="hm-dots">
+            <span class="hm-dot"></span>
+            <span class="hm-dot"></span>
+            <span class="hm-dot"></span>
+          </div>
+          <span class="hm-address">studio.cmxlabs.io &nbsp;/&nbsp; capabilities</span>
+        </div>
+        <div class="hm-body">
+          <div class="hm-header">
+            <span class="hm-title">What we build</span>
+            <span class="hm-badge">Open</span>
+          </div>
+          <div class="hm-project">
+            <span class="hm-status hm-live"></span>
+            <span class="hm-pname">Web Platforms</span>
+            <span class="hm-tag">Full-stack</span>
+          </div>
+          <div class="hm-project">
+            <span class="hm-status hm-live"></span>
+            <span class="hm-pname">SaaS Products</span>
+            <span class="hm-tag">Full-stack</span>
+          </div>
+          <div class="hm-project">
+            <span class="hm-status hm-live"></span>
+            <span class="hm-pname">Mobile Apps</span>
+            <span class="hm-tag">Full-stack</span>
+          </div>
+          <div class="hm-divider"></div>
+          <div class="hm-stats">
+            <div class="hm-stat"><span class="hm-stat-n">Design</span><span class="hm-stat-l">+ Dev</span></div>
+            <div class="hm-stat"><span class="hm-stat-n">Zero</span><span class="hm-stat-l">to launch</span></div>
+            <div class="hm-stat"><span class="hm-stat-n">Fast</span><span class="hm-stat-l">delivery</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TECH STACK MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span>React</span><span class="mq-sep">·</span>
+      <span>Next.js</span><span class="mq-sep">·</span>
+      <span>TypeScript</span><span class="mq-sep">·</span>
+      <span>Supabase</span><span class="mq-sep">·</span>
+      <span>Stripe</span><span class="mq-sep">·</span>
+      <span>Vercel</span><span class="mq-sep">·</span>
+      <span>Node.js</span><span class="mq-sep">·</span>
+      <span>Figma</span><span class="mq-sep">·</span>
+      <span>PostgreSQL</span><span class="mq-sep">·</span>
+      <span>Tailwind&nbsp;CSS</span><span class="mq-sep">·</span>
+      <span>React Native</span><span class="mq-sep">·</span>
+      <span>React</span><span class="mq-sep">·</span>
+      <span>Next.js</span><span class="mq-sep">·</span>
+      <span>TypeScript</span><span class="mq-sep">·</span>
+      <span>Supabase</span><span class="mq-sep">·</span>
+      <span>Stripe</span><span class="mq-sep">·</span>
+      <span>Vercel</span><span class="mq-sep">·</span>
+      <span>Node.js</span><span class="mq-sep">·</span>
+      <span>Figma</span><span class="mq-sep">·</span>
+      <span>PostgreSQL</span><span class="mq-sep">·</span>
+      <span>Tailwind&nbsp;CSS</span><span class="mq-sep">·</span>
+      <span>React Native</span><span class="mq-sep">·</span>
+    </div>
+  </div>
+
+  <!-- FEATURED WORK -->
+  {allProjects.length > 0 && (
+    <section class="featured-work" id="work" aria-labelledby="fw-title">
+      <div class="container">
+
+        <div class="featured-work-header sr">
+          <div>
+            <div class="section-label">Selected Work</div>
+            <h2 class="section-title" id="fw-title">Products we&rsquo;ve built.</h2>
+          </div>
+          <a href="/work" class="view-all-link">
+            Explore all projects &rarr;
+          </a>
+        </div>
+
+        {/* Featured project — large card */}
+        {featured && (
+          <a href={`/work/${featured.slug}`} class="fw-featured sr" aria-label={`View ${featured.name} case study`}>
+            <div class="fw-featured-img">
+              {featured.thumbnail
+                ? <img src={featured.thumbnail} alt={`${featured.name} screenshot`} loading="lazy" />
+                : <div class="fw-featured-placeholder">Screenshot coming soon</div>
+              }
+            </div>
+            <div class="fw-featured-content">
+              <div class="fw-category-badge">
+                <span class="fw-cat-dot"></span>
+                {featured.category}
+              </div>
+              <h3 class="fw-title">{featured.name}</h3>
+              <p class="fw-desc">{featured.shortDesc}</p>
+              <div class="fw-tags">
+                {featured.tags.map(t => <span class="fw-tag">{t}</span>)}
+              </div>
+              <span class="fw-cta">View case study &rarr;</span>
+            </div>
+          </a>
+        )}
+
+        {/* Other projects grid */}
+        {otherWork.length > 0 && (
+          <div class="fw-grid">
+            {otherWork.map(p => (
+              <a href={`/work/${p.slug}`} class="fw-card sr" aria-label={`View ${p.name} case study`}>
+                <div class="fw-card-img">
+                  {p.thumbnail
+                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="lazy" />
+                    : <div class="fw-card-placeholder">Coming soon</div>
+                  }
+                </div>
+                <div class="fw-card-body">
+                  <div class="fw-card-category">{p.category}</div>
+                  <div class="fw-card-title">{p.name}</div>
+                  <p class="fw-card-desc">{p.shortDesc}</p>
+                  <span class="fw-card-link">View case study &rarr;</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        )}
+
+      </div>
+    </section>
+  )}
+
+  <!-- CMX MEANING -->
+  <section class="cmx-section" aria-label="What CMX stands for">
+    <div class="container">
+      <div class="fc-header sr">
+        <div class="section-label">What CMX stands for</div>
+      </div>
+
+      <div class="cmx-cols">
+
+        <div class="cmx-col sr" data-letter="C">
+          <span class="cmx-letter" aria-hidden="true">C</span>
+          <div class="cmx-col-name">Command</div>
+          <p class="cmx-col-desc">Every decision is intentional. We lead with purpose, never guesswork.</p>
+          <div class="cmx-col-chips">
+            <span>Strategic</span><span>Precise</span><span>Intentional</span>
+          </div>
+        </div>
+
+        <div class="cmx-col sr" data-letter="M">
+          <span class="cmx-letter" aria-hidden="true">M</span>
+          <div class="cmx-col-name">Modern</div>
+          <p class="cmx-col-desc">Modern stack, clean code, no shortcuts. Built for now and what comes next.</p>
+          <div class="cmx-col-chips">
+            <span>React</span><span>Next.js</span><span>TypeScript</span>
+          </div>
+        </div>
+
+        <div class="cmx-col sr" data-letter="X">
+          <span class="cmx-letter" aria-hidden="true">X</span>
+          <div class="cmx-col-name">Xecution</div>
+          <p class="cmx-col-desc">From first line of code to live product. We ship, every single time.</p>
+          <div class="cmx-col-chips">
+            <span>Design</span><span>Build</span><span>Ship</span>
+          </div>
+        </div>
+
+        <div class="cmx-col cmx-col-labs sr" data-letter="Labs">
+          <span class="cmx-letter" aria-hidden="true">Labs</span>
+          <div class="cmx-col-name">Where ideas become products</div>
+          <p class="cmx-col-desc">We don&rsquo;t just build for clients. We build our own products too. Constantly experimenting, validating, and shipping.</p>
+          <div class="cmx-col-chips">
+            <span>SaaS</span><span>Platforms</span><span>Tools</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL-BLEED CODE PHOTO -->
+  <div class="fullbleed-photo" aria-hidden="true">
+    <img src="/assets/code-editor.jpg" alt="Modern development environment" loading="lazy" />
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-header sr">
+        <div class="section-label">What we do</div>
+        <h2 class="section-title" id="services-title">
+          Built for your<br />specific business.
+        </h2>
+        <p class="section-intro">
+          We use the right tools for each job. From strategy to shipped product.
+        </p>
+      </div>
+
+      <div class="bento-grid">
+
+        <div class="bento-card bento-wide bento-purple sr">
+          <div class="bento-num">01</div>
+          <div class="bento-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h3 class="bento-title">Product Design &amp; Development</h3>
+          <p class="bento-desc">From wireframe to shipped product. Web apps, mobile apps, platforms and e-commerce that perform.</p>
+          <div class="bento-chips"><span>Web apps</span><span>Mobile</span><span>Platforms</span><span>E-commerce</span></div>
+        </div>
+
+        <div class="bento-card bento-accent-card sr">
+          <div class="bento-accent-label">Our stack</div>
+          <div class="bento-stack-chips">
+            <span>React</span><span>Next.js</span><span>TypeScript</span>
+            <span>Supabase</span><span>Stripe</span><span>Vercel</span>
+            <span>Node.js</span><span>Figma</span>
+          </div>
+          <div class="bento-accent-footer">Modern. Proven. Fast.</div>
+        </div>
+
+        <div class="bento-card bento-teal sr">
+          <div class="bento-num">02</div>
+          <div class="bento-icon bento-icon-teal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <h3 class="bento-title">Custom Software &amp; Automation</h3>
+          <p class="bento-desc">Dashboards, APIs and workflow automations that save time and scale. Integrations that actually work.</p>
+          <div class="bento-chips"><span>Dashboards</span><span>APIs</span><span>Integrations</span></div>
+        </div>
+
+        <div class="bento-card bento-wide bento-orange sr">
+          <div class="bento-num">03</div>
+          <div class="bento-icon bento-icon-orange" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <h3 class="bento-title">Strategy, Analytics &amp; Growth</h3>
+          <p class="bento-desc">We track what matters and use it to grow your business. SEO, analytics and growth strategy with real results.</p>
+          <div class="bento-chips"><span>Analytics</span><span>Strategy</span><span>SEO</span><span>Growth</span></div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center; margin-top:40px;">
+        <a href="/services" class="btn btn-ghost btn-lg sr">See all services &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CMX LABS -->
+  <section class="pillars-section" id="why" aria-labelledby="pillars-title">
+    <div class="container">
+      <div class="section-header sr">
+        <div class="section-label">Why us</div>
+        <h2 class="section-title" id="pillars-title">
+          Built different.<br />By design.
+        </h2>
+      </div>
+
+      <div class="pillars-grid">
+
+        <div class="pillar sr">
+          <div class="pillar-icon pillar-icon-purple" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+          </div>
+          <div class="pillar-title">Design &amp; Dev</div>
+          <p class="pillar-desc">One studio handles everything: design, code, and launch. No handoff gaps, no miscommunication.</p>
+        </div>
+
+        <div class="pillar sr">
+          <div class="pillar-icon pillar-icon-teal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <div class="pillar-title">Full-Stack</div>
+          <p class="pillar-desc">Frontend to backend. We own the entire product, not just one layer of it.</p>
+        </div>
+
+        <div class="pillar sr">
+          <div class="pillar-icon pillar-icon-orange" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+          </div>
+          <div class="pillar-title">Zero to Launch</div>
+          <p class="pillar-desc">Idea to live product, fast. We scope lean, build smart, and ship what matters first.</p>
+        </div>
+
+        <div class="pillar sr">
+          <div class="pillar-icon pillar-icon-lite" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="pillar-title">No Fluff</div>
+          <p class="pillar-desc">Direct, focused, efficient. Straight to execution with no unnecessary overhead or agency bloat.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL-BLEED TEAM PHOTO -->
+  <div class="fullbleed-photo" aria-hidden="true">
+    <img src="/assets/team-coding.jpg" alt="CMX Labs team at work" loading="lazy" />
+  </div>
+
+  <!-- PROCESS -->
+  <section class="section process-section" id="process" aria-labelledby="process-title">
+    <div class="container">
+      <div class="section-header sr">
+        <div class="section-label">How we work</div>
+        <h2 class="section-title" id="process-title">
+          Four steps.<br />One live product.
+        </h2>
+        <p class="section-intro">No fluff, no endless back-and-forth. We move fast and ship the real thing.</p>
+      </div>
+
+      <div class="process-steps">
+
+        <div class="process-step sr">
+          <div class="process-step-num">01</div>
+          <div class="process-icon process-icon-purple" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <h3 class="process-step-title">Discover</h3>
+          <p class="process-step-desc">We dig into your idea, your users, and the problem worth solving. No assumptions. Just clarity on what to build and why.</p>
+          <div class="process-step-chips"><span>Research</span><span>Scoping</span><span>Strategy</span></div>
+        </div>
+
+        <div class="process-step sr">
+          <div class="process-step-num">02</div>
+          <div class="process-icon process-icon-teal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h3 class="process-step-title">Design</h3>
+          <p class="process-step-desc">Wireframes to high-fidelity UI. We design for real users: clean, functional, and aligned with your brand from day one.</p>
+          <div class="process-step-chips"><span>Wireframes</span><span>UI&nbsp;/&nbsp;UX</span><span>Prototypes</span></div>
+        </div>
+
+        <div class="process-step sr">
+          <div class="process-step-num">03</div>
+          <div class="process-icon process-icon-orange" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <h3 class="process-step-title">Build</h3>
+          <p class="process-step-desc">Modern stack, clean code, no shortcuts. We build fast, test as we go, and keep you in the loop at every milestone.</p>
+          <div class="process-step-chips"><span>Development</span><span>Testing</span><span>Iteration</span></div>
+        </div>
+
+        <div class="process-step sr">
+          <div class="process-step-num">04</div>
+          <div class="process-icon process-icon-launch" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          </div>
+          <h3 class="process-step-title">Launch</h3>
+          <p class="process-step-desc">We deploy, monitor, and hand over a product that works. Launch is not the end. It&rsquo;s where the real work starts.</p>
+          <div class="process-step-chips"><span>Deploy</span><span>Monitor</span><span>Support</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta" aria-label="Call to action">
+    <div class="container">
+      <div class="final-cta-inner sr">
+        <div class="section-label">Ready to build?</div>
+        <h2 class="final-cta-title">Great ideas deserve<br />to be built.</h2>
+        <p class="final-cta-sub">
+          Whether you&rsquo;re launching something new or transforming an existing business, let&rsquo;s turn your vision into a digital product that works.
+        </p>
+        <div class="final-cta-btns">
+          <a href="/contact" class="btn btn-primary btn-xl btn-magnetic">Let&rsquo;s build your project &rarr;</a>
+          <a href="/work"    class="btn btn-ghost btn-xl">See our work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT STRIP -->
+  <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="contact-left sr">
+          <div class="section-label">Get in touch</div>
+          <h2 class="section-title" id="contact-title">
+            Let&rsquo;s build<br />something real.
+          </h2>
+          <p class="contact-desc">
+            Tell us what you&rsquo;re working on. We reply within 24 hours.
+          </p>
+          <div class="contact-details">
+            <a href="mailto:info@cmxlabs.io" class="contact-item">
+              <div class="ci-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <span>info@cmxlabs.io</span>
+            </a>
+            <a href="tel:+59996754955" class="contact-item">
+              <div class="ci-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.18 2 2 0 012.07.1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121 14.91v2.01z"/></svg>
+              </div>
+              <span>+599 9 675 4955</span>
+            </a>
+            <div class="contact-item">
+              <div class="ci-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              </div>
+              <span>Willemstad, Cura&ccedil;ao</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-right sr">
+          <form class="contact-form" id="contactForm" novalidate aria-label="Contact form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" placeholder="you@company.com" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject">What are you building?</label>
+              <input type="text" id="subject" name="subject" placeholder="e.g. A booking platform for my business" />
+            </div>
+            <div class="form-group">
+              <label for="message">Tell us more</label>
+              <textarea id="message" name="message" rows="5" placeholder="Describe your project or idea..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-full btn-magnetic" id="submitBtn">
+              Send message &rarr;
+            </button>
+            <div class="form-success" role="alert" aria-live="polite">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Message sent. We&rsquo;ll be in touch soon.
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</Base>

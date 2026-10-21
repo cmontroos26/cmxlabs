@@ -1,0 +1,245 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPublishedProjects, getProjectBySlug, getAdjacentProjects } from '../../data/projects.js';
+
+export async function getStaticPaths() {
+  const projects = getPublishedProjects();
+  return projects.map(project => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const project = getProjectBySlug(slug);
+
+if (!project) {
+  return Astro.redirect('/work');
+}
+
+const { prev, next } = getAdjacentProjects(slug);
+---
+
+<Base
+  title={project.seo.title}
+  description={project.seo.description}
+  ogImage={project.thumbnail ?? undefined}
+>
+
+  <!-- CASE HERO -->
+  <section class="case-hero" aria-label={`${project.name} case study`}>
+    <div class="container">
+      <div class="case-hero-inner">
+
+        <!-- Left: copy -->
+        <div class="case-hero-copy">
+          <div class="case-hero-eyebrow">
+            Case Study &nbsp;&middot;&nbsp; {project.category}
+          </div>
+          <h1 class="case-hero-title">{project.name}</h1>
+          <p class="case-hero-tagline">{project.tagline}</p>
+          <div class="case-hero-tags">
+            {project.tags.map(tag => <span class="case-tag">{tag}</span>)}
+          </div>
+          <div class="case-hero-actions">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary btn-lg"
+              >
+                View live project &rarr;
+              </a>
+            )}
+            <a href="/work" class="btn btn-ghost btn-lg">&larr; All work</a>
+          </div>
+        </div>
+
+        <!-- Right: screenshot or placeholder -->
+        <div class="case-hero-img">
+          {project.thumbnail ? (
+            <img
+              src={project.thumbnail}
+              alt={`${project.name} interface screenshot`}
+              loading="eager"
+            />
+          ) : (
+            <div class="case-hero-placeholder">
+              <span class="case-placeholder-badge">{project.category}</span>
+              <div class="case-hero-placeholder-name">{project.name}</div>
+              <div class="case-hero-placeholder-label">Screenshot coming soon</div>
+            </div>
+          )}
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- META STRIP -->
+  <section class="case-study" aria-label="Project details">
+    <div class="container">
+      <div class="case-meta-strip sr">
+        <div class="case-meta-item">
+          <span class="case-meta-label">Industry</span>
+          <span class="case-meta-value">{project.industry}</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Project type</span>
+          <span class="case-meta-value">{project.type}</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Our role</span>
+          <span class="case-meta-value">{project.role}</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Year</span>
+          <span class="case-meta-value">{project.year ?? 'Recent'}</span>
+        </div>
+      </div>
+
+      <!-- CASE CONTENT SECTIONS -->
+      <div class="case-content">
+
+        <!-- Overview -->
+        <div class="case-section sr">
+          <div class="case-section-label">Overview</div>
+          <div class="case-section-body">
+            <h2 class="case-section-title">About the project</h2>
+            <p class="case-section-text">{project.description}</p>
+          </div>
+        </div>
+
+        <!-- Challenge -->
+        {project.challenge && (
+          <div class="case-section sr">
+            <div class="case-section-label">The Challenge</div>
+            <div class="case-section-body">
+              <h2 class="case-section-title">The problem to solve</h2>
+              <p class="case-section-text">{project.challenge}</p>
+            </div>
+          </div>
+        )}
+
+        <!-- Solution -->
+        {project.solution && (
+          <div class="case-section sr">
+            <div class="case-section-label">Our Approach</div>
+            <div class="case-section-body">
+              <h2 class="case-section-title">What we built</h2>
+              <p class="case-section-text">{project.solution}</p>
+            </div>
+          </div>
+        )}
+
+        <!-- Features -->
+        {project.features && project.features.length > 0 && (
+          <div class="case-section sr">
+            <div class="case-section-label">Features Delivered</div>
+            <div class="case-section-body">
+              <h2 class="case-section-title">What we shipped</h2>
+              <div class="case-features-list">
+                {project.features.map(feature => (
+                  <div class="case-feature">
+                    <div class="case-feature-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <span class="case-feature-text">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Technologies -->
+        {project.technologies && project.technologies.length > 0 && (
+          <div class="case-section sr">
+            <div class="case-section-label">Tech Stack</div>
+            <div class="case-section-body">
+              <h2 class="case-section-title">Technologies used</h2>
+              <div class="case-tech-chips">
+                {project.technologies.map(tech => (
+                  <span class="case-tech-chip">{tech}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Screenshots -->
+        {project.desktopScreenshots && project.desktopScreenshots.length > 0 && (
+          <div class="case-section sr">
+            <div class="case-section-label">Screenshots</div>
+            <div class="case-section-body">
+              <h2 class="case-section-title">The product</h2>
+              <div class="case-screenshots">
+                {project.desktopScreenshots.map((src, i) => (
+                  <div class="case-screenshot">
+                    <img
+                      src={src}
+                      alt={`${project.name} screenshot ${i + 1}`}
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Results -->
+        {project.results && (
+          <div class="case-section sr">
+            <div class="case-section-label">Results</div>
+            <div class="case-section-body">
+              <h2 class="case-section-title">The outcome</h2>
+              <p class="case-section-text">{project.results}</p>
+            </div>
+          </div>
+        )}
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT NAVIGATION -->
+  <section class="case-nav-strip" aria-label="Navigate to other projects">
+    <div class="container">
+      <div class="case-nav-grid">
+        {prev && (
+          <a href={`/work/${prev.slug}`} class="case-nav-card">
+            <span class="case-nav-dir">&larr; Previous project</span>
+            <span class="case-nav-name">{prev.name}</span>
+            <span class="case-nav-cat">{prev.category}</span>
+          </a>
+        )}
+        {next && (
+          <a href={`/work/${next.slug}`} class="case-nav-card" style={!prev ? 'grid-column: 2' : ''}>
+            <span class="case-nav-dir">Next project &rarr;</span>
+            <span class="case-nav-name">{next.name}</span>
+            <span class="case-nav-cat">{next.category}</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="case-cta-section" aria-label="Start a similar project">
+    <div class="container">
+      <div class="final-cta-inner sr">
+        <div class="section-label">Work with us</div>
+        <h2 class="final-cta-title">Have a similar<br />project in mind?</h2>
+        <p class="final-cta-sub">
+          Let&rsquo;s talk about what you&rsquo;re building. We&rsquo;ll help you scope it, design it, and ship it.
+        </p>
+        <div class="final-cta-btns">
+          <a href="/contact" class="btn btn-primary btn-xl btn-magnetic">Start a project &rarr;</a>
+          <a href="/work" class="btn btn-ghost btn-xl">View all work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

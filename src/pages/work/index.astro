@@ -1,0 +1,129 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPublishedProjects } from '../../data/projects.js';
+
+const projects = getPublishedProjects();
+
+// Collect unique filter categories from published projects
+const filterCategories = [
+  { key: 'all',     label: 'All Projects' },
+  { key: 'saas',    label: 'SaaS Platforms' },
+  { key: 'website', label: 'Websites' },
+].filter(cat => cat.key === 'all' || projects.some(p => p.filterCategory === cat.key));
+---
+
+<Base
+  title="Our Work — CMX Labs | Digital Product Studio"
+  description="Explore the digital products, platforms, and websites CMX Labs has designed and built — from sports tech SaaS to hospitality and fundraising platforms."
+>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" aria-label="Work portfolio">
+    <div class="container">
+      <div class="page-hero-eyebrow">Our Work</div>
+      <h1 class="page-hero-title">
+        Products we&rsquo;ve<br /><em class="hero-accent">designed &amp; built.</em>
+      </h1>
+      <p class="page-hero-sub">
+        From SaaS platforms and booking systems to hospitality websites and campaign platforms — these are some of the products we&rsquo;ve shipped.
+      </p>
+    </div>
+  </section>
+
+  <!-- WORK LISTING -->
+  <section class="work-page" aria-label="Portfolio projects">
+    <div class="container" style="padding-bottom: var(--section-pad);">
+
+      <!-- Filters -->
+      {filterCategories.length > 1 && (
+        <div class="work-filters" role="group" aria-label="Filter projects by category">
+          {filterCategories.map((cat, i) => (
+            <button
+              class={`work-filter-btn ${i === 0 ? 'active' : ''}`}
+              data-filter={cat.key}
+              type="button"
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <!-- Projects grid -->
+      <div class="work-grid">
+        {projects.map(project => (
+          <article
+            class="project-card sr"
+            data-filter-cat={project.filterCategory}
+          >
+            <!-- Screenshot / placeholder -->
+            <div class="project-card-img">
+              {project.thumbnail ? (
+                <img
+                  src={project.thumbnail}
+                  alt={`${project.name} screenshot`}
+                  loading="lazy"
+                />
+              ) : (
+                <div class="project-card-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                  <span>Screenshot coming soon</span>
+                </div>
+              )}
+            </div>
+
+            <!-- Card body -->
+            <div class="project-card-body">
+              <div class="project-card-meta">
+                <span class="project-card-category">{project.category}</span>
+                {project.year && <span class="project-card-year">{project.year}</span>}
+              </div>
+              <h2 class="project-card-title">{project.name}</h2>
+              <p class="project-card-desc">{project.shortDesc}</p>
+              <div class="project-card-tags">
+                {project.tags.slice(0, 4).map(tag => (
+                  <span class="project-card-tag">{tag}</span>
+                ))}
+              </div>
+              <div class="project-card-footer">
+                <a href={`/work/${project.slug}`} class="project-card-cta">
+                  View case study &rarr;
+                </a>
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-card-live"
+                    aria-label={`View ${project.name} live`}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="final-cta" aria-label="Start a project">
+    <div class="container">
+      <div class="final-cta-inner sr">
+        <div class="section-label">Work with us</div>
+        <h2 class="final-cta-title">Have a project in mind?</h2>
+        <p class="final-cta-sub">
+          Tell us what you&rsquo;re building. We&rsquo;ll help you scope it, design it, and ship it.
+        </p>
+        <div class="final-cta-btns">
+          <a href="/contact" class="btn btn-primary btn-xl btn-magnetic">Start a project &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 88">
+  <title>CMX Labs — Dark Background Version</title>
+
+  <!--
+    Icon mark — matches icon-only.svg character:
+    D1 large outline (52×52, center 42,44)  rightmost tip ≈ 78.8
+    D2 medium offset right (44×44, center 62,45)  rightmost tip ≈ 93.1
+    Circle node at intersection midpoint (52,44)
+    Gap from D2 rightmost to text x=114 is ≈ 21 SVG units
+  -->
+
+  <!-- Diamond 1: large outer outline -->
+  <rect x="16" y="18" width="52" height="52" rx="7" fill="none" stroke="#AFA9EC" stroke-width="2.5" transform="rotate(45 42 44)"/>
+
+  <!-- Diamond 2: medium, offset right, semi-transparent -->
+  <rect x="40" y="23" width="44" height="44" rx="6" fill="#7F77DD" fill-opacity="0.20" stroke="#7F77DD" stroke-width="1.8" transform="rotate(45 62 45)"/>
+
+  <!-- Node at intersection midpoint -->
+  <circle cx="52" cy="44" r="6" fill="#AFA9EC"/>
+  <circle cx="52" cy="44" r="2.8" fill="#ffffff"/>
+  <circle cx="52" cy="44" r="13" fill="none" stroke="#AFA9EC" stroke-width="0.6" opacity="0.18"/>
+
+  <!-- Wordmark: CMX Labs on one line -->
+  <text y="57" font-family="Inter, Arial Black, sans-serif">
+    <tspan x="114" font-size="46" font-weight="700" letter-spacing="-1.5" fill="#F0EDE4">CMX </tspan><tspan font-size="30" font-weight="500" letter-spacing="-0.5" fill="#AFA9EC">Labs</tspan>
+  </text>
+
+  <!-- Purple underline accent -->
+  <rect x="114" y="64" width="222" height="2.5" rx="1.5" fill="#7F77DD"/>
+
+  <!-- Slogan -->
+  <text x="114" y="82" font-family="Inter, Arial, sans-serif" font-size="10.5" font-weight="400" letter-spacing="2.6" fill="#AFA9EC" opacity="0.72">Where ideas meet execution.</text>
+</svg>

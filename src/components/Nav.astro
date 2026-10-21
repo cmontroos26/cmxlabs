@@ -1,0 +1,76 @@
+---
+interface Props {
+  currentPath: string;
+}
+const { currentPath } = Astro.props;
+
+function isActive(path: string) {
+  if (path === '/') return currentPath === '/';
+  return currentPath === path || currentPath.startsWith(path + '/');
+}
+---
+
+<nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+
+    <a href="/" class="nav-logo" aria-label="CMX Labs home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 88" height="52" aria-label="CMX Labs" role="img">
+        <rect x="16" y="18" width="52" height="52" rx="7" fill="none" stroke="#AFA9EC" stroke-width="2.5" transform="rotate(45 42 44)"/>
+        <rect x="40" y="23" width="44" height="44" rx="6" fill="#7F77DD" fill-opacity="0.18" stroke="#7F77DD" stroke-width="1.8" transform="rotate(45 62 45)"/>
+        <circle cx="52" cy="44" r="6" fill="#AFA9EC"/>
+        <circle cx="52" cy="44" r="2.8" fill="#ffffff"/>
+        <circle cx="52" cy="44" r="13" fill="none" stroke="#AFA9EC" stroke-width="0.6" opacity="0.18"/>
+        <text y="57" font-family="Inter, Arial Black, sans-serif">
+          <tspan x="114" font-size="46" font-weight="700" letter-spacing="-1.5" fill="#f0ede4">CMX </tspan><tspan font-size="30" font-weight="500" letter-spacing="-0.5" fill="#AFA9EC">Labs</tspan>
+        </text>
+        <rect x="114" y="64" width="222" height="2.5" rx="1.5" fill="#7F77DD"/>
+        <text x="114" y="82" font-family="Inter, Arial, sans-serif" font-size="11.5" font-weight="500" letter-spacing="2.2" fill="#c8c3f0" opacity="0.90">Where ideas meet execution.</text>
+      </svg>
+    </a>
+
+    <ul class="nav-links" id="navLinks" role="list">
+      <li>
+        <a href="/work" class={`nav-link ${isActive('/work') ? 'active' : ''}`}>
+          Work
+        </a>
+      </li>
+      <li>
+        <a href="/services" class={`nav-link ${isActive('/services') ? 'active' : ''}`}>
+          Services
+        </a>
+      </li>
+      <li>
+        <a href="/about" class={`nav-link ${isActive('/about') ? 'active' : ''}`}>
+          About
+        </a>
+      </li>
+      <li>
+        <a href="/contact" class={`nav-link ${isActive('/contact') ? 'active' : ''}`}>
+          Contact
+        </a>
+      </li>
+
+      <!-- Mobile-only CTA -->
+      <li class="nav-mobile-cta">
+        <a href="/contact" class="btn btn-primary btn-lg">Start a project &rarr;</a>
+      </li>
+
+      <!-- Mobile menu footer info -->
+      <li class="nav-menu-footer" aria-hidden="true">
+        <div class="nav-footer-row">
+          <a href="mailto:info@cmxlabs.io">info@cmxlabs.io</a>
+          <span>Willemstad, Cura&ccedil;ao</span>
+        </div>
+        <span>&copy; 2026 CMX Labs</span>
+      </li>
+    </ul>
+
+    <a href="/contact" class="btn btn-nav-cta nav-cta">Start a project</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+</nav>
