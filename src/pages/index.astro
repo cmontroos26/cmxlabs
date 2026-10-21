@@ -128,13 +128,13 @@ const row2 = [...shifted, ...shifted];
         </div>
 
         {/* Row 1 — scrolls left */}
-        <div class="fw-filmstrip-wrap sr">
+        <div class="fw-filmstrip-wrap">
           <div class="fw-filmstrip fw-filmstrip-left">
             {row1.map((p, i) => (
               <a href={`/work/${p.slug}`} class="fw-film-card" aria-label={`View ${p.name}`} tabindex={i >= count ? -1 : 0}>
                 <div class="fw-film-img">
                   {p.thumbnail
-                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="eager" decoding="async" />
+                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="eager" decoding="async" fetchpriority="high" />
                     : <div class="fw-film-placeholder">{p.category}</div>
                   }
                 </div>
@@ -154,7 +154,7 @@ const row2 = [...shifted, ...shifted];
               <a href={`/work/${p.slug}`} class="fw-film-card" aria-label={`View ${p.name}`} tabindex={i >= count ? -1 : 0}>
                 <div class="fw-film-img">
                   {p.thumbnail
-                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="eager" decoding="async" />
+                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="eager" decoding="async" fetchpriority="high" />
                     : <div class="fw-film-placeholder">{p.category}</div>
                   }
                 </div>
@@ -222,7 +222,7 @@ const row2 = [...shifted, ...shifted];
 
   <!-- FULL-BLEED CODE PHOTO -->
   <div class="fullbleed-photo" aria-hidden="true">
-    <img src="/assets/code-editor.jpg" alt="Modern development environment" loading="lazy" />
+    <img src="/assets/code-editor.webp" alt="Modern development environment" loading="lazy" />
   </div>
 
   <!-- SERVICES -->
