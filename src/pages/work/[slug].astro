@@ -168,22 +168,29 @@ const { prev, next } = getAdjacentProjects(slug);
         )}
 
         <!-- Screenshots -->
-        {project.desktopScreenshots && project.desktopScreenshots.length > 0 && (
+        {((project.desktopScreenshots && project.desktopScreenshots.length > 0) || (project.mobileScreenshots && project.mobileScreenshots.length > 0)) && (
           <div class="case-section sr">
             <div class="case-section-label">Screenshots</div>
             <div class="case-section-body">
               <h2 class="case-section-title">The product</h2>
-              <div class="case-screenshots">
-                {project.desktopScreenshots.map((src, i) => (
-                  <div class="case-screenshot">
-                    <img
-                      src={src}
-                      alt={`${project.name} screenshot ${i + 1}`}
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
-              </div>
+              {project.desktopScreenshots && project.desktopScreenshots.length > 0 && (
+                <div class="case-screenshots">
+                  {project.desktopScreenshots.map((src, i) => (
+                    <div class="case-screenshot">
+                      <img src={src} alt={`${project.name} screenshot ${i + 1}`} loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {project.mobileScreenshots && project.mobileScreenshots.length > 0 && (
+                <div class="case-screenshots case-screenshots-mobile">
+                  {project.mobileScreenshots.map((src, i) => (
+                    <div class="case-screenshot case-screenshot-mobile">
+                      <img src={src} alt={`${project.name} mobile screenshot ${i + 1}`} loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}

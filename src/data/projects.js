@@ -79,10 +79,14 @@ export const projects = [
     tags: ['Hospitality', 'Booking', 'Website', 'Tourism'],
     services: ['UI/UX Design', 'Web Development', 'Booking Integration'],
     technologies: ['React', 'Next.js', 'Tailwind CSS', 'Vercel'],
-    // Replace with actual screenshot when available
-    thumbnail: null,
+    thumbnail: '/assets/hilltop-thumb.jpg',
     desktopScreenshots: [],
-    mobileScreenshots: [],
+    mobileScreenshots: [
+      '/assets/hilltop-hero.jpg',
+      '/assets/hilltop-pool.jpg',
+      '/assets/hilltop-living.jpg',
+      '/assets/hilltop-booking.jpg',
+    ],
     description: `Hilltop Villa Curaçao is a premium vacation rental property that needed a digital presence matching the quality and experience of the property itself. We built a modern, conversion-focused website that showcases the villa beautifully and drives direct bookings — reducing dependence on third-party platforms.`,
     challenge: `The property was relying entirely on platforms like Airbnb and Booking.com, giving them limited control over their brand, pricing, and guest relationships. They needed a professional direct-booking website that reflected the premium nature of the property.`,
     solution: `We created an immersive, visually-led website with full-screen imagery, a clear showcase of amenities and experiences, and a streamlined direct booking flow. The design communicates the premium hospitality experience from the first scroll.`,
@@ -123,10 +127,9 @@ export const projects = [
     tags: ['Beauty', 'Lifestyle', 'Branding', 'Website'],
     services: ['Brand Design', 'UI/UX Design', 'Web Development'],
     technologies: ['React', 'Next.js', 'Tailwind CSS', 'Vercel'],
-    // Replace with actual screenshot when available
-    thumbnail: null,
-    desktopScreenshots: [],
-    mobileScreenshots: [],
+    thumbnail: '/assets/hairbyjessica-desktop.jpg',
+    desktopScreenshots: ['/assets/hairbyjessica-desktop.jpg'],
+    mobileScreenshots: ['/assets/hairbyjessica-mobile.jpg'],
     description: `Hair by Jessica needed a digital presence that reflected the craft, care, and premium nature of their salon experience. We designed a website with a strong editorial aesthetic — sophisticated typography, an elegant color palette, and a layout that lets the work speak for itself.`,
     challenge: `The salon had no website and relied entirely on social media and word-of-mouth for new clients. They needed a professional online presence that communicated quality, showcased their work, and made it easy for potential clients to book an appointment.`,
     solution: `We designed an editorial-inspired website with strong visual hierarchy, a curated portfolio section, and clear service and booking information. The design aesthetic was crafted specifically to attract the right clientele and reflect the salon's premium positioning.`,
@@ -147,9 +150,9 @@ export const projects = [
   },
 
   {
-    id: 'support-xiara',
-    slug: 'support-xiara',
-    name: 'Support Xiara',
+    id: 'xiara-journey',
+    slug: 'xiara-journey',
+    name: 'Xiara Journey',
     tagline: 'A fundraising campaign platform built to inspire action.',
     shortDesc:
       'A fundraising campaign website designed to tell a compelling story, build trust with donors, and make giving easy.',
@@ -161,16 +164,16 @@ export const projects = [
     year: 2024,
     status: 'published',
     featured: false,
-    liveUrl: 'https://supportxiara.vercel.app/',
+    liveUrl: 'https://xiarajourney.traha.app/',
     appStoreUrl: null,
     playStoreUrl: null,
     tags: ['Fundraising', 'Campaign', 'Social Impact'],
     services: ['UI/UX Design', 'Web Development', 'Donation Integration'],
     technologies: ['React', 'Next.js', 'Vercel'],
-    thumbnail: '/assets/screenshot-supportelevate.png',
-    desktopScreenshots: ['/assets/screenshot-supportelevate.png'],
-    mobileScreenshots: [],
-    description: `Support Xiara is a fundraising campaign platform built to raise awareness for Xiara's cause and make it easy for supporters to contribute. The platform needed to communicate urgency and emotional impact while maintaining transparency and trust with donors.`,
+    thumbnail: '/assets/xiara-desktop.jpg',
+    desktopScreenshots: ['/assets/xiara-desktop.jpg'],
+    mobileScreenshots: ['/assets/xiara-mobile.jpg'],
+    description: `Xiara Journey is a fundraising campaign platform built to raise awareness for Xiara's cause and make it easy for supporters to contribute. The platform needed to communicate urgency and emotional impact while maintaining transparency and trust with donors.`,
     challenge: `The campaign needed a digital platform quickly — one that could tell a compelling human story, present the cause clearly, and give donors confidence that their contribution would matter. Generic fundraising pages on third-party platforms didn't give enough control over the narrative or design.`,
     solution: `We built a focused campaign website with a clear narrative arc — from introducing Xiara's story to explaining the impact of donations and making the giving process simple. The design balances emotional storytelling with clear, trustworthy information presentation.`,
     features: [
@@ -183,9 +186,9 @@ export const projects = [
     ],
     results: null,
     seo: {
-      title: 'Support Xiara — Fundraising Campaign | CMX Labs Work',
+      title: 'Xiara Journey — Fundraising Campaign | CMX Labs Work',
       description:
-        'How CMX Labs designed and built the Support Xiara fundraising campaign platform to inspire donors to act.',
+        'How CMX Labs designed and built the Xiara Journey fundraising campaign platform to inspire donors to act.',
     },
   },
 ];

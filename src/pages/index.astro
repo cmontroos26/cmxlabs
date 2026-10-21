@@ -4,7 +4,9 @@ import { getPublishedProjects } from '../data/projects.js';
 
 const allProjects = getPublishedProjects();
 const featured    = allProjects.find(p => p.featured);
-const otherWork   = allProjects.filter(p => !p.featured).slice(0, 3);
+const otherWork   = allProjects.filter(p => !p.featured);
+// Duplicate for seamless infinite scroll (need at least ~2× viewport width of cards)
+const filmstrip   = [...otherWork, ...otherWork, ...otherWork, ...otherWork];
 ---
 
 <Base
@@ -117,7 +119,10 @@ const otherWork   = allProjects.filter(p => !p.featured).slice(0, 3);
         <div class="featured-work-header sr">
           <div>
             <div class="section-label">Selected Work</div>
-            <h2 class="section-title" id="fw-title">Products we&rsquo;ve built.</h2>
+            <h2 class="section-title" id="fw-title">
+              Products we&rsquo;ve built.
+              <span class="fw-count-badge" aria-label={`${allProjects.length} projects`}>{allProjects.length}</span>
+            </h2>
           </div>
           <a href="/work" class="view-all-link">
             Explore all projects &rarr;
@@ -148,25 +153,30 @@ const otherWork   = allProjects.filter(p => !p.featured).slice(0, 3);
           </a>
         )}
 
-        {/* Other projects grid */}
+        {/* Project filmstrip — scales from 4 to 50+ projects automatically */}
         {otherWork.length > 0 && (
-          <div class="fw-grid">
-            {otherWork.map(p => (
-              <a href={`/work/${p.slug}`} class="fw-card sr" aria-label={`View ${p.name} case study`}>
-                <div class="fw-card-img">
-                  {p.thumbnail
-                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="lazy" />
-                    : <div class="fw-card-placeholder">Coming soon</div>
-                  }
-                </div>
-                <div class="fw-card-body">
-                  <div class="fw-card-category">{p.category}</div>
-                  <div class="fw-card-title">{p.name}</div>
-                  <p class="fw-card-desc">{p.shortDesc}</p>
-                  <span class="fw-card-link">View case study &rarr;</span>
-                </div>
-              </a>
-            ))}
+          <div class="fw-filmstrip-wrap" aria-label="More projects">
+            <div class="fw-filmstrip">
+              {filmstrip.map((p, i) => (
+                <a
+                  href={`/work/${p.slug}`}
+                  class="fw-film-card"
+                  aria-label={`View ${p.name}`}
+                  tabindex={i >= otherWork.length ? -1 : 0}
+                >
+                  <div class="fw-film-img">
+                    {p.thumbnail
+                      ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="lazy" />
+                      : <div class="fw-film-placeholder">{p.category}</div>
+                    }
+                  </div>
+                  <div class="fw-film-body">
+                    <span class="fw-film-name">{p.name}</span>
+                    <span class="fw-film-cat">{p.category}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
         )}
 
