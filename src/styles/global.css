@@ -531,7 +531,7 @@ button { font-family: inherit; }
 
 .fw-featured-img {
   position: relative; overflow: hidden;
-  background: rgba(124,110,250,0.06);
+  background: var(--bg-1);
 }
 .fw-featured-img img {
   width: 100%; height: 100%; object-fit: cover;
@@ -602,7 +602,7 @@ button { font-family: inherit; }
 
 .fw-card-img {
   aspect-ratio: 16/9; overflow: hidden;
-  background: rgba(124,110,250,0.06);
+  background: var(--bg-1);
   position: relative;
 }
 .fw-card-img img {
@@ -676,7 +676,7 @@ button { font-family: inherit; }
 .fw-film-card:hover { border-color: var(--bd-2); transform: translateY(-4px); }
 .fw-film-img {
   aspect-ratio: 4/3; overflow: hidden;
-  background: rgba(124,110,250,0.06);
+  background: var(--bg-1);
 }
 .fw-film-img img {
   width: 100%; height: 100%;
@@ -904,12 +904,40 @@ button { font-family: inherit; }
   position: relative; z-index: 1;
   width: 100%; height: 60vh; min-height: 380px; max-height: 600px;
   overflow: hidden; line-height: 0;
+  background: var(--bg-1);
 }
 .fullbleed-photo img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
 }
+.fullbleed-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(7,7,12,.92) 0%, rgba(7,7,12,.75) 45%, rgba(7,7,12,.2) 100%);
+  display: flex; align-items: center;
+  padding: 0 clamp(24px, 6vw, 80px);
+  line-height: 1.5;
+}
+.fo-content {
+  display: flex; flex-direction: column; gap: 0;
+  max-width: 400px;
+}
+.fo-label {
+  font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 12px;
+  white-space: nowrap;
+}
+.fo-title {
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  font-weight: 800; letter-spacing: -.03em; line-height: 1.1;
+  color: var(--t1); margin-bottom: 14px;
+}
+.fo-desc {
+  font-size: clamp(.8rem, 1.3vw, .92rem);
+  color: var(--t2); line-height: 1.65;
+}
 @media (max-width: 767px) {
-  .fullbleed-photo { height: 56vw; min-height: 260px; }
+  .fullbleed-photo { height: 72vw; min-height: 300px; max-height: 440px; }
+  .fo-content { max-width: 75vw; }
+  .fo-desc { display: none; }
 }
 
 /* ─── PROCESS ────────────────────────────────────────────── */
