@@ -46,8 +46,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://www.cmxl
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
 
-  <!-- Critical: prevent white flash before CSS loads -->
-  <style>html,body{background:#07070C;color:#fff}</style>
+  <!-- Critical: prevent white flash before CSS loads (is:inline = Astro must not move/process this) -->
+  <style is:inline>html,body{background:#07070C;color:#fff}</style>
 
   <!-- Fonts — loaded async to avoid render-blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
