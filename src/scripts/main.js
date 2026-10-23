@@ -109,9 +109,9 @@
         srObserver.unobserve(e.target);
       }
     });
-  // Large rootMargin: trigger reveal 900px before element enters viewport
-  // so fast scrollers never catch up to a hidden section
-  }, { threshold: 0, rootMargin: '0px 0px 900px 0px' });
+  // Large rootMargin: trigger reveal 1500px before element enters viewport
+  // giving lazy images plenty of time to load before becoming visible
+  }, { threshold: 0, rootMargin: '0px 0px 1500px 0px' });
 
   document.querySelectorAll('.sr').forEach(el => {
     const rect = el.getBoundingClientRect();
@@ -127,10 +127,10 @@
   });
 
   // Safety net: if the observer misses anything (slow device, fast scroll),
-  // force-reveal all remaining hidden elements after 1 second
+  // force-reveal all remaining hidden elements after 400ms
   setTimeout(() => {
     document.querySelectorAll('.sr:not(.vis)').forEach(el => el.classList.add('vis'));
-  }, 1000);
+  }, 400);
 
   /* ----------------------------------------------------------
      6. MAGNETIC BUTTONS
@@ -345,7 +345,90 @@
   }
 
   /* ----------------------------------------------------------
-     11. CONTACT FORM
+     11. FILMSTRIP — JS-driven drag / swipe scroll
+  ---------------------------------------------------------- */
+  document.querySelectorAll('.fw-filmstrip-wrap').forEach(wrap => {
+    const strip = wrap.querySelector('.fw-filmstrip');
+    if (!strip) return;
+
+    const isRight = strip.classList.contains('fw-filmstrip-right');
+    // px/s — matches original 30s / 24s CSS durations
+    const SPEED   = isRight ? 73 : 58;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Hand off from CSS animation to JS
+    strip.style.animation = 'none';
+    strip.style.cursor    = 'grab';
+
+    let halfW  = 0;
+    let x      = 0;
+    let tLast  = null;
+    let paused = reduced; // respect reduced-motion
+
+    function clamp(v) {
+      while (v < -halfW) v += halfW;
+      while (v > 0)      v -= halfW;
+      return v;
+    }
+
+    function tick(now) {
+      if (!paused) {
+        const dt = tLast ? (now - tLast) / 1000 : 0;
+        x = clamp(x + (isRight ? SPEED : -SPEED) * dt);
+        strip.style.transform = `translateX(${x}px)`;
+      }
+      tLast = now;
+      requestAnimationFrame(tick);
+    }
+
+    function init() {
+      halfW = strip.scrollWidth / 2;
+      x     = isRight ? -halfW : 0;
+      strip.style.transform = `translateX(${x}px)`;
+      requestAnimationFrame(tick);
+    }
+
+    // Mouse drag
+    let dragging = false, mStartX = 0, mStartScroll = 0;
+
+    strip.addEventListener('mousedown', e => {
+      dragging = true; paused = true;
+      mStartX = e.clientX; mStartScroll = x;
+      strip.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
+    window.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      x = clamp(mStartScroll + (e.clientX - mStartX));
+      strip.style.transform = `translateX(${x}px)`;
+    });
+    window.addEventListener('mouseup', () => {
+      if (!dragging) return;
+      dragging = false; paused = false; tLast = null;
+      strip.style.cursor = 'grab';
+    });
+
+    // Touch swipe
+    let tStartX = 0, tStartScroll = 0;
+    strip.addEventListener('touchstart', e => {
+      paused = true; tLast = null;
+      tStartX = e.touches[0].clientX; tStartScroll = x;
+    }, { passive: true });
+    strip.addEventListener('touchmove', e => {
+      x = clamp(tStartScroll + (e.touches[0].clientX - tStartX));
+      strip.style.transform = `translateX(${x}px)`;
+    }, { passive: true });
+    strip.addEventListener('touchend', () => {
+      paused = false; tLast = null;
+    });
+
+    // Init after images are measured
+    if (document.readyState === 'complete') { init(); }
+    else { window.addEventListener('load', init, { once: true }); }
+  });
+
+  /* ----------------------------------------------------------
+     12. CONTACT FORM (was 11)
   ---------------------------------------------------------- */
   document.querySelectorAll('.contact-form').forEach(form => {
     const successMsg = form.querySelector('.form-success');
