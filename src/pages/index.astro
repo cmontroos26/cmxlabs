@@ -17,6 +17,12 @@ const row2 = [...shifted, ...shifted];
   description="CMX Labs is a digital product studio based in Curaçao. We design, build, and launch digital products — from first wireframe to real users."
   showCanvas={true}
 >
+  <!-- Preload all filmstrip thumbnails so they start downloading immediately -->
+  <Fragment slot="head">
+    {allProjects.filter(p => p.thumbnail).map(p => (
+      <link rel="preload" as="image" href={p.thumbnail} fetchpriority="high" />
+    ))}
+  </Fragment>
 
   <!-- HERO -->
   <section class="hero" id="home" aria-label="Hero">
@@ -134,7 +140,7 @@ const row2 = [...shifted, ...shifted];
               <a href={`/work/${p.slug}`} class="fw-film-card" aria-label={`View ${p.name}`} tabindex={i >= count ? -1 : 0}>
                 <div class="fw-film-img">
                   {p.thumbnail
-                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="eager" decoding="async" fetchpriority="high" />
+                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="eager" decoding="async" />
                     : <div class="fw-film-placeholder">{p.category}</div>
                   }
                 </div>
@@ -154,7 +160,7 @@ const row2 = [...shifted, ...shifted];
               <a href={`/work/${p.slug}`} class="fw-film-card" aria-label={`View ${p.name}`} tabindex={i >= count ? -1 : 0}>
                 <div class="fw-film-img">
                   {p.thumbnail
-                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="eager" decoding="async" fetchpriority="high" />
+                    ? <img src={p.thumbnail} alt={`${p.name} screenshot`} loading="eager" decoding="async" />
                     : <div class="fw-film-placeholder">{p.category}</div>
                   }
                 </div>

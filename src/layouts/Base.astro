@@ -65,6 +65,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://www.cmxl
     />
   </noscript>
 
+  <!-- Page-specific head content (preloads, etc.) -->
+  <slot name="head" />
+
   <!-- Structured data — Organization -->
   <script type="application/ld+json">
     {
