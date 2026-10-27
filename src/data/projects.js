@@ -159,7 +159,7 @@ export const projects = [
     year: 2026,
     status: 'published',
     featured: false,
-    liveUrl: 'https://studiofaar.traha.app/permanente-make-up',
+    liveUrl: 'https://studiofaar.traha.app/',
     appStoreUrl: null,
     playStoreUrl: null,
     tags: ['Beauty', 'Lifestyle', 'Booking', 'Website'],
