@@ -345,25 +345,29 @@
   }
 
   /* ----------------------------------------------------------
-     11. FILMSTRIP — JS-driven drag / swipe scroll
+     11. FILMSTRIP — CSS animation first; JS takes over on drag/swipe
+     CSS @keyframes run immediately on first paint (no JS needed).
+     On first drag or touch, we read the current computed translateX
+     and seamlessly hand off to a JS RAF loop so position tracking works.
   ---------------------------------------------------------- */
   document.querySelectorAll('.fw-filmstrip-wrap').forEach(wrap => {
     const strip = wrap.querySelector('.fw-filmstrip');
     if (!strip) return;
 
     const isRight = strip.classList.contains('fw-filmstrip-right');
-    // px/s — matches original 30s / 24s CSS durations
-    const SPEED   = isRight ? 73 : 58;
+    const SPEED   = isRight ? 73 : 58; // px/s — matches 30s / 24s CSS durations
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Hand off from CSS animation to JS
-    strip.style.animation = 'none';
-    strip.style.cursor    = 'grab';
+    if (reduced) { strip.style.animation = 'none'; return; }
 
+    // CSS animation is running — just show grab cursor
+    strip.style.cursor = 'grab';
+
+    let jsMode = false; // CSS handles scrolling until first interaction
     let halfW  = 0;
     let x      = 0;
     let tLast  = null;
-    let paused = reduced; // respect reduced-motion
+    let paused = false;
 
     function clamp(v) {
       while (v < -halfW) v += halfW;
@@ -381,10 +385,15 @@
       requestAnimationFrame(tick);
     }
 
-    function init() {
+    // Called on first drag/touch — reads live CSS position for seamless handoff
+    function switchToJS() {
+      if (jsMode) return;
+      jsMode = true;
       halfW = strip.scrollWidth / 2;
-      x     = isRight ? -halfW : 0;
-      strip.style.transform = `translateX(${x}px)`;
+      // getComputedStyle resolves CSS animation transform to pixels
+      const mat = new DOMMatrix(getComputedStyle(strip).transform);
+      x = clamp(mat.m41);
+      strip.style.animation = 'none';
       requestAnimationFrame(tick);
     }
 
@@ -392,6 +401,7 @@
     let dragging = false, mStartX = 0, mStartScroll = 0;
 
     strip.addEventListener('mousedown', e => {
+      switchToJS();
       dragging = true; paused = true;
       mStartX = e.clientX; mStartScroll = x;
       strip.style.cursor = 'grabbing';
@@ -411,6 +421,7 @@
     // Touch swipe
     let tStartX = 0, tStartScroll = 0;
     strip.addEventListener('touchstart', e => {
+      switchToJS();
       paused = true; tLast = null;
       tStartX = e.touches[0].clientX; tStartScroll = x;
     }, { passive: true });
@@ -421,10 +432,6 @@
     strip.addEventListener('touchend', () => {
       paused = false; tLast = null;
     });
-
-    // Init after images are measured
-    if (document.readyState === 'complete') { init(); }
-    else { window.addEventListener('load', init, { once: true }); }
   });
 
   /* ----------------------------------------------------------
