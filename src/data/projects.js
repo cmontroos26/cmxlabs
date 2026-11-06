@@ -231,12 +231,12 @@ export const projects = [
   },
 
   {
-    id: 'bobe-sprit-gym',
-    slug: 'bobe-sprit-gym',
-    name: 'Bobe Sprit Gym',
+    id: 'bob-esprit-gym',
+    slug: 'bob-esprit-gym',
+    name: 'Bob Esprit Gym',
     tagline: 'Real gym. Real strength. A fitness brand built to convert.',
     shortDesc:
-      'A bold fitness website for Bobe Sprit Gym in Curaçao, designed to showcase memberships, personal training, and drive sign-ups.',
+      'A bold fitness website for Bob Esprit Gym in Curaçao, designed to showcase memberships, personal training, and drive sign-ups.',
     category: 'Business Website',
     filterCategory: 'website',
     industry: 'Health & Fitness',
@@ -254,9 +254,9 @@ export const projects = [
     thumbnail: '/assets/bobesprit-desktop.webp',
     desktopScreenshots: ['/assets/bobesprit-desktop.webp'],
     mobileScreenshots: ['/assets/bobesprit-mobile.webp'],
-    description: `Bobe Sprit Gym needed a digital presence as strong as the brand itself. We built a bold, high-energy fitness website that communicates the gym's identity, showcases its membership options and personal training services, and makes it easy for new members to get started.`,
+    description: `Bob Esprit Gym needed a digital presence as strong as the brand itself. We built a bold, high-energy fitness website that communicates the gym's identity, showcases its membership options and personal training services, and makes it easy for new members to get started.`,
     challenge: `The gym had no professional website and was relying on social media to attract new members. They needed a site that matched their no-nonsense, results-driven identity and made it effortless for potential members to explore offerings and take action.`,
-    solution: `We designed a bold, dark-toned website with strong typography and an energetic layout that reflects the Bobe Sprit Gym brand. Clear membership tiers, a personal training section, and prominent calls to action guide visitors toward signing up.`,
+    solution: `We designed a bold, dark-toned website with strong typography and an energetic layout that reflects the Bob Esprit Gym brand. Clear membership tiers, a personal training section, and prominent calls to action guide visitors toward signing up.`,
     features: [
       'Bold fitness-focused design with strong visual identity',
       'Membership plans and pricing showcase',
@@ -267,9 +267,9 @@ export const projects = [
     ],
     results: null,
     seo: {
-      title: 'Bobe Sprit Gym — Fitness Website | CMX Labs Work',
+      title: 'Bob Esprit Gym — Fitness Website | CMX Labs Work',
       description:
-        'How CMX Labs designed and built the Bobe Sprit Gym website to showcase memberships, personal training, and drive new member sign-ups.',
+        'How CMX Labs designed and built the Bob Esprit Gym website to showcase memberships, personal training, and drive new member sign-ups.',
     },
   },
 
